@@ -1,0 +1,28 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="experiments")
+ */
+class Experiment extends BaseEntity
+{
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User",mappedBy="experiments",fetch="LAZY")
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Table", mappedBy="experiment", cascade={"all"}, orphanRemoval=true)
+     */
+    private $table_for_exp;
+}
+

@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ user.firstName }} {{ user.secondName }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+  <div id="hellobox"> Hello, {{ user.firstName }} {{ user.secondName }}</div>
+
+{% endblock %}

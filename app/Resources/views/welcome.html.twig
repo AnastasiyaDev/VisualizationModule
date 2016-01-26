@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/welcome.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="content clearfix">
+
+        <div class="al-center">Добро пожаловать в систему тестирования</div>
+
+        {% if error %}
+            <div id="err" class="al-center"> Неверный пароль</div>
+        {% endif %}
+
+        <form id="authorization" autocomplete="off" action="{{ path('login_check') }}" method="post" name="authorization">
+
+            <div class="al-center wid_202 marg-auto">
+                <div class="al-center "><label for="name-field" class="lab">Логин: </label></div>
+                <input type="text" id="name-field" name="_username" size="37" tabindex="1" pattern="[a-zA-Z0-9_-\t]+" value="{{ last_username }}" required>
+            </div>
+
+            <div class="al-center wid_202 marg-auto">
+                <div class="al-center"><label for="password-field" class="lab">Пароль: </label></div>
+                <input type="password" id="password-field" name="_password" size="37" tabindex="2" required>
+            </div>
+
+            <input type="hidden" name="_target_patch" value="account">
+
+            <div class="sent-reset marg-auto clearfix">
+
+                <div class="wid_202 marg-auto mar-top-30">
+                    <a href="{{ path('registrationPage') }}"><div class="fl-left red-button" id="registr" formnovalidate>Регистрация</div></a>
+                    <button type="submit" class="fl-right blue-button" name="login" id="input" tabindex="0">Вход</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

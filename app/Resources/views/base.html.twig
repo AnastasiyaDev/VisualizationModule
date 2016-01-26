@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %} Визуализируй{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/body.css') }}">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('bundles/framework/images/logo.png') }}" />
+        {% javascripts %}
+        <script src="{{ asset('bundles/framework/js/jquery-1.12.0.min.js') }}"></script>
+        <script src="{{ asset('bundles/framework/js/handlebars-v4.0.5.js') }}"></script>
+        {% endjavascripts %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
