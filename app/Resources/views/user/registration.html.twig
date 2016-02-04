@@ -3,65 +3,79 @@
 {% block title %} Регистрация | {{ parent() }}{% endblock %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/welcome_content.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/welcome.css') }}">
 {% endblock %}
 {% block body%}
 
-    <div align="center">
 
-        <div class="form_content clearfix">
+        <div class="content position-fix welcome-reg-content">
 
-            <div class="marg-auto" id="logo"></div>
+            {#<div class="marg-auto" id="logo"></div>#}
 
             {% if error is defined %}
-                <div id="err" class="al-center">{{ error }}</div>
+                <div id="err" >{{ error }}</div>
             {% endif %}
-            <div id="err" class="al-center"></div>
+
+            <div id="err"></div>
 
             <form id="registrationForm" autocomplete="off" action="{{ path("registrationNew") }}" method="post" name="registrationForm">
 
-                <div class="al-center wid_202 marg-auto">
-                    <div><label for="name-field" class="lab">Логин: </label></div>
+                <div>
+                    <label for="name-field" class="al-center disp-block">Логин: </label>
                     <input type="text" id="name-field" name="_username" size="37" pattern="[\w-.]+" tabindex="1" required>
                 </div>
 
-                <div class="al-center wid_202 marg-auto">
-                    <div><label for="password-field-1" class="lab">Пароль: </label></div>
-                    <input type="password" id="password-field-1" name="_password" size="37" pattern="[\w-.]{6,37}" tabindex="2" required>
+                <div>
+                    <label for="password-field-1" class="al-center disp-block">Пароль: </label>
+                    <input type="password" id="password-field-1" name="_password" size="37" pattern="[\w-.]{6,37}" tabindex="2" required title="Не менее 6 символов, содержащие латинские буквы и цифры">
                 </div>
 
-                <div class="al-center wid_202 marg-auto position-rel">
-                    <div><label for="password-field-2" class="lab">Повторите пароль: </label></div>
+                <div>
+                    <label for="password-field-2" class="al-center disp-block">Повторите пароль: </label>
                     <input type="password" id="password-field-2" name="_password-2" size="37" onchange="checkPass()" pattern="[\w-.]{6,37}" tabindex="3" required>
                 </div>
 
-                <div class="al-center wid_202 marg-auto">
-                    <div><label for="name-field" class="lab">Имя: </label></div>
+                <div>
+                    <label for="name-field" class="al-center disp-block">Имя: </label>
                     <input type="text" id="name-field" name="_firstName" size="37" pattern="[а-яА-ЯёЁa-zA-Z-]+" tabindex="4" required>
                 </div>
 
-                <div class="al-center wid_202 marg-auto">
-                    <div><label for="second-name-field" class="lab">Фамилия: </label></div>
+                <div>
+                    <label for="second-name-field" class="al-center disp-block">Фамилия: </label>
                     <input type="text" id="second-name-field" name="_secondName"  size="37" pattern="[а-яА-ЯёЁa-zA-Z-]+" tabindex="5" required>
                 </div>
 
-                <div class="al-center wid_202 marg-auto mar-top-30">
+                <div>
+                    <label for="user-email" class="al-center disp-block">Ваш e-mail:</label>
+                    <input type="email" id="user-email" name="_email" size="37" tabindex="6" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required >
+                </div>
+
+                <div>
+                    <select name="_select">
+                        <option selected="selected">Выберите должность</option>
+                        <option>Студент</option>
+                        <option>Аспирант</option>
+                        <option>Лаборант</option>
+                        <option>Старший лаборант</option>
+                        <option>Ассистент</option>
+                        <option>Преподователь</option>
+                        <option>Старший преподователь</option>
+                        <option>Доцент</option>
+                        <option>Профессор</option>
+                        <option>Заведующий кафедрой</option>
+                        <option>Декан</option>
+                        <option>Проректор</option>
+                        <option>Ректор</option>
+                    </select>
+                </div>
+
+                <div class="marg-auto">
                     <a href={{ path('root') }}><div class="fl-left blue-button" id="input">Назад</div></a>
                     <button type="submit" class="fl-right red-button" id="registr" tabindex="7">Регистрация</button>
                 </div>
             </form>
         </div>
-    </div>
 
-
-
-    {#{{ form_start(form) }}#}
-    {#{{ form_row(form.username) }}#}
-    {#{{ form_row(form.password.first) }}#}
-    {#{{ form_row(form.password.second) }}#}
-
-    {#<button type="submit">Register!</button>#}
-    {#{{ form_end(form) }}#}
 
     {% endblock %}
 

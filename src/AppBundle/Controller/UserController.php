@@ -63,6 +63,8 @@ class UserController extends Controller
         $user->setPassword($encoded);
         $user->setFirstName($request->get('_firstName'));
         $user->setSecondName($request->get('_secondName'));
+        $user->setEmail($request->get('_email'));
+        $user->setPost($request->get('_select'));
 
 //        $user->setRoles('ROLE_USER');
         $em = $this->getDoctrine()->getManager();
