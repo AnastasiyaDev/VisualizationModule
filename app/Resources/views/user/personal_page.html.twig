@@ -6,4 +6,27 @@
 
   <div id="hellobox"> Hello, {{ user.firstName }} {{ user.secondName }}</div>
 
+
+  {% if user.experiments is not empty %}
+    {% for experiment in user.tests %}
+
+        {#<a href={{ path('userTest',{'id':user.id,'testId':test.id}) }}>#}
+          <p>{{ experiments.name }}</p>
+          <span>{{ experiment.description }}</span>
+        {#</a>#}
+
+    {% endfor %}
+
+  {% else %}
+
+      <span id="prompt">Здесь будут отображаться ваши эксперименты</span>
+
+      <form action="{{ path('experimentPage') }}">
+          <button type="submit">Добавить эксперимент</button>
+      </form>
+
+
+
+  {% endif %}
+
 {% endblock %}

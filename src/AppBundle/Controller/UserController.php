@@ -84,6 +84,14 @@ class UserController extends Controller
         return $this->redirectToRoute('userPage',array('id' => $user->getId()));
     }
 
+    /**
+     * @Route("/addExperiment", name="experimentPage")
+     */
+    public function addExperimentAction()
+    {
+        return $this->render(':experiment:new_experiment.html.twig');
+    }
+
 
 
 }

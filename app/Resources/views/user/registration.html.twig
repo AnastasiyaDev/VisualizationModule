@@ -50,8 +50,8 @@
                     <input type="email" id="user-email" name="_email" size="37" tabindex="6" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required >
                 </div>
 
-                <div>
-                    <select name="_select">
+                <div >
+                    <select name="_select" class="disp-block marg-auto marg-top-14">
                         <option selected="selected">Выберите должность</option>
                         <option>Студент</option>
                         <option>Аспирант</option>
@@ -69,7 +69,7 @@
                     </select>
                 </div>
 
-                <div class="marg-auto">
+                <div class="sent-reset marg-auto">
                     <a href={{ path('root') }}><div class="fl-left blue-button" id="input">Назад</div></a>
                     <button type="submit" class="fl-right red-button" id="registr" tabindex="7">Регистрация</button>
                 </div>
