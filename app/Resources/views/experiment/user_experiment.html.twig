@@ -6,12 +6,13 @@
 
     <div class="content marg-auto clearfix">
 
-        <div>
-            <h3>{{ experiment.name }}</h3>
-            <p>{{ experiment.description }}</p>
-        </div>
+            <div class="fl-left">
+                <h3>{{ experiment.name }}</h3>
+                <p>{{ experiment.description }}</p>
+            </div>
 
     </div>
+
 
     {% if experiment.tables is not empty %}
         {% for table in experiment.tables %}
@@ -29,14 +30,9 @@
 
     {% endif %}
 
-    {#<form action="{{ path('tablePage',{'id':experiment.id}) }}">#}
-        {#<button type="submit">Добавить таблицу</button>#}
-    {#</form>#}
-
-
-
-
-
+    <form method="post" action={{ path('tablePage',{'id':experiment.id}) }} >
+        <button type="submit">Дабавить таблицу</button>
+    </form>
 
 
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ table.title }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div class="content marg-auto clearfix">
+
+        <div>
+            <h3>{{ table.title }}</h3>s
+            <p>{{ table.info }}</p>
+        </div>
+
+    </div>
+
+
+
+
+    {#<form id="" autocomplete="off" action="{{ path("newTable") }}" method="post" name="">#}
+
+
+
+
+
+
+
+        <button type="submit">Заполнить таблицу</button>
+    {#</form>#}
+
+
+
+
+
+
+
+{% endblock %}

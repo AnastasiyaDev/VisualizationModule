@@ -7,13 +7,13 @@
 <div class="content position-fix welcome-reg-content">
 
 
+
     <form id="newExp" autocomplete="off" action="{{ path("newExperiment") }}" method="post" name="newExp">
 
-    {#{% for experiment in user.experiments %}#}
+        {#{% for experiment in user.experiments %}#}
+        <h1>Эксперимент № </h1>
 
-        <h1>Эксперимент №</h1>
-            {#{{ loop.index }}</p>#}
-
+        {#{{ loop.index }}#}
         <div class="al-center marg-auto">
             <label for="name-field" class="al-center disp-block">Название: </label>
             <input type="text" id="name-field" name="_expname" size="30" tabindex="1" required>
@@ -31,7 +31,7 @@
 
 
         <select name="_status" class="disp-block marg-auto marg-top-14" tabindex="4" >
-            <option selected="selected">Выберите статус: </option>
+            <option selected="selected" disabled>Выберите статус: </option>
             <option>Активный</option>
             <option>Закрытый</option>
             <option>В процессе</option>
@@ -40,7 +40,7 @@
 
 
         <div class="sent-reset marg-auto">
-            {#<a href={{ path('userPage') }}><div class="fl-left blue-button">Назад</div></a>#}
+            {#<a href={{ path('userPage',{'id':user.id}) }}><div class="fl-left blue-button">Назад</div></a>#}
             <button type="submit" class="fl-right red-button" id="" tabindex="5">Создать</button>
         </div>
 

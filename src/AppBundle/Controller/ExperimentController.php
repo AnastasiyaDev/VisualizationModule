@@ -18,9 +18,7 @@ class ExperimentController extends Controller
      */
     public function indexAction($id)
     {
-        $exp = $this->getDoctrine()
-            ->getRepository('AppBundle:Experiment')
-            ->find($id);
+        $exp = $this->getDoctrine()->getRepository('AppBundle:Experiment')->find($id);
 
 //        $user = $this->getUser();
 //        if (!$user->getExperiment()->isEmpty()) {
@@ -32,13 +30,13 @@ class ExperimentController extends Controller
         if(!$exp) {
             throw $this->createNotFoundException('No found test for id'.$id);
         }
-        return $this->render('experiment/about_experiment.html.twig', array('exreriment' => $exp));
+        return $this->render('experiment/about_experiment.html.twig', array('experiment' => $exp));
     }
 
     /**
      * @Route("/experiment/new", name="newExperiment")
      */
-    public function experimentAction(Request $request)
+    public function experimentAction( Request $request)
     {
         $exp = new Experiment();
 
@@ -47,12 +45,26 @@ class ExperimentController extends Controller
         $exp->setExpDate(new \DateTime(date('d.m.Y', strtotime($request->get('_expdate')))));
         $exp->setStatus($request->get('_status'));
 
+        $user = $this->getUser();
+        $exp->setUser($user);
 
         $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
         $em->persist($exp);
         $em->flush();
 
         return $this->redirectToRoute('aboutExperiment', array('id' => $exp->getId()));
+    }
+
+    /**
+     * @Route("experimentid{id}/addTable", name="tablePage")
+     */
+    public function addTableAction($id)
+    {
+        $exp = $this->getDoctrine()->getRepository('AppBundle:Experiment')->find($id);
+
+        return $this->render(':experiment/table:new_table.html.twig', array('experiment' => $exp));
+
     }
 
 }

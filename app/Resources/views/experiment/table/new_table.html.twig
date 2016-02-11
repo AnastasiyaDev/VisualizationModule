@@ -1,0 +1,76 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Добавление таблицы | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div class="content position-fix welcome-reg-content">
+
+
+
+        <form id="newTable" autocomplete="off" action="{{ path("newTable", {'id':experiment.id}) }}" method="post" name="newTable">
+
+            <h1>Заполните данные для таблицы</h1>
+
+            <div class="al-center marg-auto">
+                <label for="name-field" class="al-center disp-block">Название: </label>
+                <input type="text" id="name-field" name="_title" size="30" tabindex="1" required>
+            </div>
+
+            <div class="al-center marg-auto">
+                <label for="des-field" class="al-center disp-block">Описание: </label>
+                <textarea id="des-field" name="_info" cols="37" tabindex="2"></textarea>
+            </div>
+
+            <div class="al-center marg-auto">
+                <label for="datepicker" class="al-center disp-block">Выберите дату: </label>
+                <input type="text" id="datepicker" name="_tabledate" size="25" tabindex="3">
+            </div>
+
+            <div class="al-center marg-auto">
+                <label for="name-x-field" class="al-center disp-block">Название столбцов: </label>
+                <input type="text" id="name-x-field" name="_clable" size="30" tabindex="4" required>
+            </div>
+
+            <div class="al-center marg-auto">
+                <label for="name-y-field" class="al-center disp-block">Название строк: </label>
+                <input type="text" id="name-y-field" name="_rlable" size="30" tabindex="5" required>
+            </div>
+
+            <select id="col-count" name="_col-count" class="disp-block marg-auto marg-top-14" tabindex="6" >
+                <option selected="selected" disabled>Выберите число столбцов: </option>
+            </select>
+
+            <select id="row-count" name="_row-count" class="disp-block marg-auto marg-top-14" tabindex="7" >
+                <option selected="selected" disabled>Выберите число строк: </option>
+            </select>
+
+
+            <div class="sent-reset marg-auto">
+                {#<a href={{ path('userPage',{'id':user.id}) }}><div class="fl-left blue-button">Назад</div></a>#}
+                <button type="submit" class="fl-right red-button" id="" tabindex="5">Создать</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <script>
+        $(function() {
+            $( "#datepicker" ).datepicker();
+        });
+    </script>
+
+
+    <script>
+
+        for(var i = 1; i<100; i++)
+        {
+            $('#col-count').append( $('<option>'+ i +'</option>'));
+            $('#row-count').append( $('<option>'+ i +'</option>'));
+        }
+
+    </script>
+
+
+{% endblock %}

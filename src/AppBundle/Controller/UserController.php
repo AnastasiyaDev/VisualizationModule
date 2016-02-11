@@ -92,6 +92,30 @@ class UserController extends Controller
         return $this->render(':experiment:new_experiment.html.twig');
     }
 
+    /**
+     * @Route("/id{id}/experiment/id{experimentId}", name="userExperiment")
+     */
+    public function showUserExperimentAction($id, $experimentId)
+    {
+        $user = $this->getUser();
+        if ($user!= $this->getDoctrine()->getRepository('AppBundle:User')->find($id) ) {
+            return $this->redirectToRoute('userPage',array('id' => $user->getId()));
+        }
+        $exp = $this->getDoctrine()->getRepository('AppBundle:Experiment')->find($experimentId);
+
+        return $this->render(':experiment:user_experiment.html.twig', array('user' => $user, 'experiment' => $exp));
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

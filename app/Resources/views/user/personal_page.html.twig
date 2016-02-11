@@ -8,12 +8,13 @@
 
 
   {% if user.experiments is not empty %}
-    {% for experiment in user.tests %}
+    {% for experiment in user.experiments %}
 
-        {#<a href={{ path('userTest',{'id':user.id,'testId':test.id}) }}>#}
-          <p>{{ experiments.name }}</p>
+
+        <a href={{ path('userExperiment',{'id':user.id,'experimentId':experiment.id}) }}>
+          <h3>{{ experiment.name }}</h3></a>
           <span>{{ experiment.description }}</span>
-        {#</a>#}
+
 
     {% endfor %}
 
@@ -21,12 +22,11 @@
 
       <span id="prompt">Здесь будут отображаться ваши эксперименты</span>
 
-      <form action="{{ path('experimentPage') }}">
-          <button type="submit">Добавить эксперимент</button>
-      </form>
-
-
-
   {% endif %}
+
+    <form action="{{ path('experimentPage') }}">
+        <button type="submit">Добавить эксперимент</button>
+    </form>
+
 
 {% endblock %}
