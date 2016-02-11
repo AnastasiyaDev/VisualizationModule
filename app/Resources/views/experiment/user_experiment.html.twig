@@ -15,11 +15,13 @@
 
 
     {% if experiment.tables is not empty %}
+        <u>Таблицы:</u>
         {% for table in experiment.tables %}
 
-            {#<a href={{ path('userExperiment',{'id':user.id,'experimentId':experiment.id}) }}>#}
+            <a href={{ path('filingTable',{'id':table.id}) }}>
+
             <h3>{{ table.title }}</h3>
-            {#</a>#}
+            </a>
             <span>{{ table.info }}</span>
 
         {% endfor %}

@@ -54,4 +54,21 @@ class TableController extends Controller
         return $this->redirectToRoute('filingTable', array('id' => $table->getId() ));
     }
 
+    /**
+     * @Route("experimentid{id}/table/new", name="fillingTable")
+     */
+    public function filledTableAction($id, Request $request)
+    {
+
+
+
+
+    }
+
+
+
+
+
+
+
 }

@@ -7,7 +7,7 @@
     <div class="content marg-auto clearfix">
 
         <div>
-            <h3>{{ table.title }}</h3>s
+            <h3>{{ table.title }}</h3>
             <p>{{ table.info }}</p>
         </div>
 
@@ -16,7 +16,16 @@
 
 
 
-    {#<form id="" autocomplete="off" action="{{ path("newTable") }}" method="post" name="">#}
+    {#<form id="" autocomplete="off" action="{{ path("fillingTable") }}" method="post" name="">#}
+
+        <table>
+            <tr>
+                <th>Столбец</th>
+                <th>Строка</th>
+                <th>Значение</th>
+            </tr>
+
+        </table><br>
 
 
 
@@ -24,7 +33,7 @@
 
 
 
-        <button type="submit">Заполнить таблицу</button>
+        <button type="submit">Создать</button>
     {#</form>#}
 
 
