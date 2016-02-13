@@ -13,17 +13,20 @@
 
     </div>
 
+{{ table.columns }}
 
 
-
-    {#<form id="" autocomplete="off" action="{{ path("fillingTable") }}" method="post" name="">#}
+    <form autocomplete="off" action="{{ path("fillingTable", {'id' : table.id}) }}" method="post">
 
         <table>
+            {% for i in 1..table.rowCount %}
             <tr>
-                <th>Столбец</th>
-                <th>Строка</th>
-                <th>Значение</th>
+                {% for j in 1..table.columnCount %}
+                <td><input name="value[{{ i }}][{{ j }}]" ></td>
+                {% endfor %}
             </tr>
+            {% endfor %}
+
 
         </table><br>
 
@@ -34,7 +37,7 @@
 
 
         <button type="submit">Создать</button>
-    {#</form>#}
+    </form>
 
 
 

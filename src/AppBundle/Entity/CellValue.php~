@@ -6,19 +6,24 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="values")
+ * @ORM\Table(name="cell_values")
  */
-class Value extends BaseEntity{
+class CellValue extends BaseEntity{
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $value_float;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $value_string;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $value;
 
     /**
      * @ORM\ManyToOne(targetEntity="Table",inversedBy="values")
@@ -27,9 +32,10 @@ class Value extends BaseEntity{
     private $table;
 
     /**
-     * @ORM\OneToMany(targetEntity="Column", mappedBy="value", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="Column",inversedBy="values")
+     * @ORM\JoinColumn(name="col_id", referencedColumnName="id")
      */
-    private $columns;
+    private $column;
 
     /**
      * @ORM\OneToMany(targetEntity="Row", mappedBy="value", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
@@ -41,7 +47,6 @@ class Value extends BaseEntity{
      */
     public function __construct()
     {
-        $this->columns = new \Doctrine\Common\Collections\ArrayCollection();
         $this->rows = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -114,38 +119,6 @@ class Value extends BaseEntity{
         return $this->table;
     }
 
-    /**
-     * Add columns
-     *
-     * @param \AppBundle\Entity\Column $columns
-     * @return Value
-     */
-    public function addColumn(\AppBundle\Entity\Column $columns)
-    {
-        $this->columns[] = $columns;
-
-        return $this;
-    }
-
-    /**
-     * Remove columns
-     *
-     * @param \AppBundle\Entity\Column $columns
-     */
-    public function removeColumn(\AppBundle\Entity\Column $columns)
-    {
-        $this->columns->removeElement($columns);
-    }
-
-    /**
-     * Get columns
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getColumns()
-    {
-        return $this->columns;
-    }
 
     /**
      * Add rows
@@ -178,5 +151,28 @@ class Value extends BaseEntity{
     public function getRows()
     {
         return $this->rows;
+    }
+
+    /**
+     * Set value
+     *
+     * @param string $value
+     * @return Value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value
+     *
+     * @return string 
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }

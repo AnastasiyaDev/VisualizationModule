@@ -43,12 +43,20 @@ Class User implements UserInterface, \Serializable
     private $secondName;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Table", inversedBy="users",fetch="LAZY")
-     * @ORM\JoinTable(name="user_complete_table",
-     * joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     * inverseJoinColumns={@ORM\JoinColumn(name="table_id", referencedColumnName="id")})
+     * @ORM\Column(type="string", length=50)
      */
-    private $tables;
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $post;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Experiment", mappedBy="user", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
+     */
+    private $experiments;
 
 
     /**
@@ -227,5 +235,92 @@ Class User implements UserInterface, \Serializable
     }
 
 
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Add experiments
+     *
+     * @param \AppBundle\Entity\Experiment $experiments
+     * @return User
+     */
+    public function addExperiment(\AppBundle\Entity\Experiment $experiments)
+    {
+        $this->experiments[] = $experiments;
+
+        return $this;
+    }
+
+    /**
+     * Remove experiments
+     *
+     * @param \AppBundle\Entity\Experiment $experiments
+     */
+    public function removeExperiment(\AppBundle\Entity\Experiment $experiments)
+    {
+        $this->experiments->removeElement($experiments);
+    }
+
+    /**
+     * Get experiments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getExperiments()
+    {
+        return $this->experiments;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set post
+     *
+     * @param string $post
+     * @return User
+     */
+    public function setPost($post)
+    {
+        $this->post = $post;
+
+        return $this;
+    }
+
+    /**
+     * Get post
+     *
+     * @return string 
+     */
+    public function getPost()
+    {
+        return $this->post;
+    }
 }

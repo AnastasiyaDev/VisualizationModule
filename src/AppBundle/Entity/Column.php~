@@ -6,28 +6,29 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="rows")
+ * @ORM\Table(name="columns")
  */
-class Row extends NameEntity{
+class Column extends NameEntity{
 
     /**
-     * @ORM\ManyToOne(targetEntity="Table",inversedBy="rows")
+     * @ORM\ManyToOne(targetEntity="Table",inversedBy="columns")
      * @ORM\JoinColumn(name="table_id", referencedColumnName="id")
      */
     private $table;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="CellValue",inversedBy="rows")
-     * @ORM\JoinColumn(name="value_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="CellValue", mappedBy="column", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
-    private $value;
+    private $values;
+
 
 
     /**
      * Set table
      *
      * @param \AppBundle\Entity\Table $table
-     * @return Row
+     * @return Column
      */
     public function setTable(\AppBundle\Entity\Table $table = null)
     {
@@ -50,7 +51,7 @@ class Row extends NameEntity{
      * Set value
      *
      * @param \AppBundle\Entity\Value $value
-     * @return Row
+     * @return Column
      */
     public function setValue(\AppBundle\Entity\Value $value = null)
     {

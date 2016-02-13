@@ -16,11 +16,11 @@ class Column extends NameEntity{
      */
     private $table;
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="Value",inversedBy="columns")
-     * @ORM\JoinColumn(name="value_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="CellValue", mappedBy="column", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
-    private $value;
+    private $values;
 
 
 
@@ -68,5 +68,45 @@ class Column extends NameEntity{
     public function getValue()
     {
         return $this->value;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->values = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add values
+     *
+     * @param \AppBundle\Entity\CellValue $values
+     * @return Column
+     */
+    public function addValue(\AppBundle\Entity\CellValue $values)
+    {
+        $this->values[] = $values;
+
+        return $this;
+    }
+
+    /**
+     * Remove values
+     *
+     * @param \AppBundle\Entity\CellValue $values
+     */
+    public function removeValue(\AppBundle\Entity\CellValue $values)
+    {
+        $this->values->removeElement($values);
+    }
+
+    /**
+     * Get values
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getValues()
+    {
+        return $this->values;
     }
 }

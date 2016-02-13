@@ -63,7 +63,7 @@ class Table extends BaseEntity
     private $rows;
 
     /**
-     * @ORM\OneToMany(targetEntity="Value", mappedBy="table", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
+     * @ORM\OneToMany(targetEntity="CellValue", mappedBy="table", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
     private $values;
     /**

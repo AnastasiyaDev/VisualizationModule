@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 class NameEntity extends BaseEntity
 {
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
 

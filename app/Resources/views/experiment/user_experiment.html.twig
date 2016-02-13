@@ -18,7 +18,7 @@
         <u>Таблицы:</u>
         {% for table in experiment.tables %}
 
-            <a href={{ path('filingTable',{'id':table.id}) }}>
+            <a href={{ path('filingTableForm',{'id':table.id}) }}>
 
             <h3>{{ table.title }}</h3>
             </a>

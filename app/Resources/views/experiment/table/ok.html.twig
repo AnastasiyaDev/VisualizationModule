@@ -4,6 +4,34 @@
 
 {% block body %}
 
-OK
+    <div class="content marg-auto clearfix">
+
+        <div>
+            <h3>{{ table.title }}</h3>
+            <p>{{ table.info }}</p>
+        </div>
+
+    </div>
+
+
+
+        <table>
+            {% for row in table.rows %}
+                <tr>
+                    {% for col in table.columns %}
+                        <td>{{ col.value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+
+        </table><br>
+
+
+
+
+
+
+
 
 {% endblock %}
