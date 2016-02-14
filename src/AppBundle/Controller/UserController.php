@@ -85,11 +85,12 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/addExperiment", name="experimentPage")
+     * @Route("id{id}/addExperiment", name="experimentPage")
      */
-    public function addExperimentAction()
+    public function addExperimentAction($id)
     {
-        return $this->render(':experiment:new_experiment.html.twig');
+        $user = $this->getUser();
+        return $this->render(':experiment:new_experiment.html.twig', array('user' => $user) );
     }
 
     /**

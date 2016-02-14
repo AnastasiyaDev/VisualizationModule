@@ -1,16 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block title %} Регистрация | {{ parent() }}{% endblock %}
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/welcome.css') }}">
-{% endblock %}
+
 {% block body%}
 
-
         <div class="content position-fix welcome-reg-content">
-
-            {#<div class="marg-auto" id="logo"></div>#}
 
             {% if error is defined %}
                 <div id="err" >{{ error }}</div>
@@ -70,8 +64,8 @@
                 </div>
 
                 <div class="sent-reset marg-auto">
-                    <a href={{ path('root') }}><div class="fl-left blue-button" id="input">Назад</div></a>
-                    <button type="submit" class="fl-right red-button" id="registr" tabindex="7">Регистрация</button>
+                    <a href="{{ path('root') }}" class="btn">Назад</a>
+                    <button type="submit" class="fl-right btn btn-success" tabindex="7">Регистрация</button>
                 </div>
             </form>
         </div>

@@ -10,7 +10,7 @@
 
         <form id="newTable" autocomplete="off" action="{{ path("newTable", {'id':experiment.id}) }}" method="post" name="newTable">
 
-            <h1>Заполните данные для таблицы</h1>
+            <h3>Заполните данные для таблицы</h3>
 
             <div class="al-center marg-auto">
                 <label for="name-field" class="al-center disp-block">Название: </label>
@@ -47,8 +47,9 @@
 
 
             <div class="sent-reset marg-auto">
-                {#<a href={{ path('userPage',{'id':user.id}) }}><div class="fl-left blue-button">Назад</div></a>#}
-                <button type="submit" class="fl-right red-button" id="" tabindex="5">Создать</button>
+                {#нет юзера#}
+                {#<a href="{{ path('userExperiment',{'id':user.id, 'experimentId': experiment.id}) }}" class="btn">Назад</a> #}
+                <button type="submit" class="fl-right btn btn-success" id="" tabindex="5">Создать</button>
             </div>
 
         </form>

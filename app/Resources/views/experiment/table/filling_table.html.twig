@@ -11,28 +11,37 @@
             <p>{{ table.info }}</p>
         </div>
 
+        <hr>
+
+        <h4>Заполните поля таблицы значениями:</h4>
+
+
+        <form autocomplete="off" action="{{ path("fillingTable", {'id' : table.id}) }}" method="post">
+
+            <table class="table table-bordered table-condensed">
+                {% for row in table.rows %}
+                    <tr>
+                        {% for col in table.columns %}
+                            <td><input name="value[{{ row.id }}][{{ col.id }}]" ></td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+
+            </table><br>
+
+
+            <button type="submit" class="btn btn-success">Создать</button>
+        </form>
+
+        {% if root is not defined %}
+            <a href= {% if back is defined %} "{{ back }}" {% else %} "." {% endif %}><div>Back</div></a>
+        {% endif %}
+
     </div>
 
 
-    <form autocomplete="off" action="{{ path("fillingTable", {'id' : table.id}) }}" method="post">
 
-        <table>
-            {% for row in table.rows %}
-                <tr>
-                    {% for col in table.columns %}
-                        <td><input name="value[{{ row.id }}][{{ col.id }}]" ></td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-
-
-        </table><br>
-
-
-
-
-        <button type="submit">Создать</button>
-    </form>
 
 
 

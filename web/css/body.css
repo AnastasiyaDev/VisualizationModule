@@ -79,6 +79,7 @@ a {
   text-decoration: none;
 }
 button,
+td input,
 button::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
@@ -86,14 +87,6 @@ input[type="submit"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
 input[type="file"] > input[type="button"]::-moz-focus-inner {
   border: none;
-}
-table {
-  border-collapse: collapse;
-}
-td,
-th {
-  border: 1px solid #333;
-  padding: 3px;
 }
 .welcome-reg-content {
   display: flex;
@@ -112,4 +105,7 @@ th {
 }
 .marg-top-14 {
   margin-top: 14px;
+}
+td input {
+  width: 100%;
 }

@@ -109,7 +109,7 @@ class TableController extends Controller
     public function finalTableAction($id)
     {
         $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
-        return $this->render('experiment/table/ok.html.twig', ['table' => $table]);
+        return $this->render('experiment/table/final_table.html.twig', ['table' => $table]);
     }
 
 

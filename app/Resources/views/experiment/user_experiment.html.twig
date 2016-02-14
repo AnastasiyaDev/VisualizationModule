@@ -6,35 +6,35 @@
 
     <div class="content marg-auto clearfix">
 
-            <div class="fl-left">
+            <div class="">
                 <h3>{{ experiment.name }}</h3>
                 <p>{{ experiment.description }}</p>
             </div>
 
+
+        {% if experiment.tables is not empty %}
+            <u>Таблицы:</u>
+            {% for table in experiment.tables %}
+
+                <a href={{ path('filingTableForm',{'id':table.id}) }}> <!--'experimentId': experiment.id-->
+                    {#<a href={{ path('finalTable',{'id':table.id}) }}>#}
+                    <h3>{{ table.title }}</h3>
+                </a>
+                <span>{{ table.info }}</span>
+
+            {% endfor %}
+
+        {% else %}
+
+            <span id="prompt">Здесь будут отображаться ваши таблицы</span>
+
+        {% endif %}
+
+        <form method="post" action={{ path('tablePage',{'id':experiment.id}) }} >
+            <button type="submit" class="btn btn-success">Дабавить таблицу</button>
+        </form>
+
+
     </div>
-
-
-    {% if experiment.tables is not empty %}
-        <u>Таблицы:</u>
-        {% for table in experiment.tables %}
-
-            <a href={{ path('filingTableForm',{'id':table.id}) }}>
-
-            <h3>{{ table.title }}</h3>
-            </a>
-            <span>{{ table.info }}</span>
-
-        {% endfor %}
-
-    {% else %}
-
-        <span id="prompt">Здесь будут отображаться ваши таблицы</span>
-
-    {% endif %}
-
-    <form method="post" action={{ path('tablePage',{'id':experiment.id}) }} >
-        <button type="submit">Дабавить таблицу</button>
-    </form>
-
 
 {% endblock %}
