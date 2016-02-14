@@ -29,12 +29,12 @@ class Table extends BaseEntity
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $column_lable;
+    private $column_label;
 
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $row_lable;
+    private $row_label;
 
     /**
      * @ORM\Column(type="integer")
@@ -146,49 +146,49 @@ class Table extends BaseEntity
     }
 
     /**
-     * Set column_lable
+     * Set column_label
      *
-     * @param string $columnLable
+     * @param string $columnLabel
      * @return Table
      */
-    public function setColumnLable($columnLable)
+    public function setColumnLabel($columnLable)
     {
-        $this->column_lable = $columnLable;
+        $this->column_label = $columnLable;
 
         return $this;
     }
 
     /**
-     * Get column_lable
+     * Get column_label
      *
      * @return string 
      */
-    public function getColumnLable()
+    public function getColumnLabel()
     {
-        return $this->column_lable;
+        return $this->column_label;
     }
 
     /**
-     * Set row_lable
+     * Set row_label
      *
-     * @param string $rowLable
+     * @param string $rowLabel
      * @return Table
      */
-    public function setRowLable($rowLable)
+    public function setRowLabel($rowLable)
     {
-        $this->row_lable = $rowLable;
+        $this->row_label = $rowLable;
 
         return $this;
     }
 
     /**
-     * Get row_lable
+     * Get row_label
      *
      * @return string 
      */
-    public function getRowLable()
+    public function getRowLabel()
     {
-        return $this->row_lable;
+        return $this->row_label;
     }
 
     /**

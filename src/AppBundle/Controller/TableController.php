@@ -44,8 +44,8 @@ class TableController extends Controller
         $table->setTitle($request->get('_title'));
         $table->setInfo($request->get('_info'));
         $table->setTableDate(new \DateTime(date('d.m.Y', strtotime($request->get('_tabledate')))));
-        $table->setColumnLable($request->get('_clable'));
-        $table->setRowLable($request->get('_rlable'));
+        $table->setColumnLabel($request->get('_clable'));
+        $table->setRowLabel($request->get('_rlable'));
         $table->setColumnCount($request->get('_col-count'));
         $table->setRowCount($request->get('_row-count'));
 
