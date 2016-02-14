@@ -17,11 +17,9 @@ class Row extends NameEntity{
     private $table;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CellValue",inversedBy="rows")
-     * @ORM\JoinColumn(name="value_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="CellValue", mappedBy="row", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
-    private $value;
-
+    private $values;
 
     /**
      * Set table
@@ -47,25 +45,43 @@ class Row extends NameEntity{
     }
 
     /**
-     * Set value
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->values = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add values
      *
-     * @param \AppBundle\Entity\Value $value
+     * @param \AppBundle\Entity\CellValue $values
      * @return Row
      */
-    public function setValue(\AppBundle\Entity\Value $value = null)
+    public function addValue(\AppBundle\Entity\CellValue $values)
     {
-        $this->value = $value;
+        $this->values[] = $values;
 
         return $this;
     }
 
     /**
-     * Get value
+     * Remove values
      *
-     * @return \AppBundle\Entity\Value 
+     * @param \AppBundle\Entity\CellValue $values
      */
-    public function getValue()
+    public function removeValue(\AppBundle\Entity\CellValue $values)
     {
-        return $this->value;
+        $this->values->removeElement($values);
+    }
+
+    /**
+     * Get values
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getValues()
+    {
+        return $this->values;
     }
 }

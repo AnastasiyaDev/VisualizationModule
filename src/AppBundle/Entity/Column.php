@@ -48,28 +48,6 @@ class Column extends NameEntity{
     }
 
     /**
-     * Set value
-     *
-     * @param \AppBundle\Entity\Value $value
-     * @return Column
-     */
-    public function setValue(\AppBundle\Entity\Value $value = null)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return \AppBundle\Entity\Value 
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-    /**
      * Constructor
      */
     public function __construct()

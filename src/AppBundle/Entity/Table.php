@@ -52,7 +52,7 @@ class Table extends BaseEntity
      */
     private $experiment;
 
-    /*
+    /**
      * @ORM\OneToMany(targetEntity="Column", mappedBy="table", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
     private $columns;

@@ -16,10 +16,17 @@
 
 
         <table>
+            <th>#</th>
+            {% for header in table.rows.first.values %}
+                <th>{{ header.column.name }}</th>
+            {% endfor %}
             {% for row in table.rows %}
                 <tr>
-                    {% for col in table.columns %}
-                        <td>{{ col.value }}</td>
+                    <th>
+                        {{ row.name }}
+                    </th>
+                    {% for value in row.values %}
+                        <td>{{ value.value }}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}

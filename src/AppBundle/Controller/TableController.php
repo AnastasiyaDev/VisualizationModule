@@ -27,6 +27,9 @@ class TableController extends Controller
         if(!$table) {
             throw $this->createNotFoundException('No found table for id'.$id);
         }
+
+
+
         return $this->render('experiment/table/filling_table.html.twig', array('table' => $table));
     }
 
@@ -36,6 +39,7 @@ class TableController extends Controller
     public function tableAction($id, Request $request)
     {
         $table = new Table();
+        $em = $this->getDoctrine()->getManager();
 
         $table->setTitle($request->get('_title'));
         $table->setInfo($request->get('_info'));
@@ -45,15 +49,29 @@ class TableController extends Controller
         $table->setColumnCount($request->get('_col-count'));
         $table->setRowCount($request->get('_row-count'));
 
+        //row create
+        for ($i = 0 ; $i < $table->getRowCount(); $i++) {
+            $row = new Row();
+            $row->setTable($table);
+            $em->persist($row);
+        }
+
+        //col create
+        for ($i = 0 ; $i < $table->getColumnCount(); $i++) {
+            $col = new Column();
+            $col->setTable($table);
+            $em->persist($col);
+        }
+
         $exp = $this->getDoctrine()->getRepository('AppBundle:Experiment')->find($id);
         $table->setExperiment($exp);
 
-        $em = $this->getDoctrine()->getManager();
+
         $em->persist($exp);
         $em->persist($table);
         $em->flush();
 
-        return $this->redirectToRoute('filingTable', array('id' => $table->getId() ));
+        return $this->redirectToRoute('filingTableForm', array('id' => $table->getId() ));
     }
 
     /**
@@ -65,51 +83,21 @@ class TableController extends Controller
         $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
         $em = $this->getDoctrine()->getManager();
 
-        $k = 0;
-        for ($i = key($array); $i <= count($array); $i++) {
-            $row = New Row();
-            $row->setTable($table);
-            for ($j = key($array[$i]); $j <= count($array[$i]); $j++ ) {
-                if ($j == 0) {
-                $col = new Column();
-                $col->setTable($table);
+        foreach ($array as $rowId => $item) {
+            $row = $this->getDoctrine()->getRepository('AppBundle:Row')
+                ->find($rowId);
+            foreach ($item as $colId => $value) {
+                $col = $this->getDoctrine()->getRepository('AppBundle:Column')
+                    ->find($colId);
+                $cellValue = new CellValue();
+                $cellValue->setValue($value);
+                $cellValue->setColumn($col);
+                $cellValue->setRow($row);
+                $em->persist($cellValue);
+                $em->persist($row);
                 $em->persist($col);
-                    echo 1;
-                }
-                $tableValue = new CellValue();
-                $tableValue->setTable($table);
-                $tableValue->setValue($array[$i][$j]);
-                $tableValue->setColumn($col);
-                $em->persist($tableValue);
             }
-
-
-            foreach($array[$i] as $item) {
-
-
-
-
-            }
-//            for($j = 0; $j < $table->getColumnCount();$j++) {
-//                $col = new Column();
-//                $col->setTable($table);
-//                $em->persist($col);
-//                echo $j;
-//                foreach($array[$i] as $item) {
-//                    $tableValue = new CellValue();
-//                    $tableValue->setTable($table);
-//                    $tableValue->setValue($item);
-//                    $tableValue->setColumn($col);
-//                    $em->persist($tableValue);
-//                }
-//            }
-            echo '<br>';
-
-            $em->persist($row);
         }
-        $em->persist($table);
-
-        die();
         $em->flush();
 
         return $this->redirectToRoute('finalTable', ['id' => $table->getId()]);

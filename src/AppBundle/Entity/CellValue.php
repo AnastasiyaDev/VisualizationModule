@@ -38,17 +38,10 @@ class CellValue extends BaseEntity{
     private $column;
 
     /**
-     * @ORM\OneToMany(targetEntity="Row", mappedBy="value", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="Row",inversedBy="values")
+     * @ORM\JoinColumn(name="row_id", referencedColumnName="id")
      */
-    private $rows;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->rows = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $row;
 
     /**
      * Set value_float
@@ -119,40 +112,6 @@ class CellValue extends BaseEntity{
         return $this->table;
     }
 
-
-    /**
-     * Add rows
-     *
-     * @param \AppBundle\Entity\Row $rows
-     * @return Value
-     */
-    public function addRow(\AppBundle\Entity\Row $rows)
-    {
-        $this->rows[] = $rows;
-
-        return $this;
-    }
-
-    /**
-     * Remove rows
-     *
-     * @param \AppBundle\Entity\Row $rows
-     */
-    public function removeRow(\AppBundle\Entity\Row $rows)
-    {
-        $this->rows->removeElement($rows);
-    }
-
-    /**
-     * Get rows
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getRows()
-    {
-        return $this->rows;
-    }
-
     /**
      * Set value
      *
@@ -197,5 +156,28 @@ class CellValue extends BaseEntity{
     public function getColumn()
     {
         return $this->column;
+    }
+
+    /**
+     * Set row
+     *
+     * @param \AppBundle\Entity\Row $row
+     * @return CellValue
+     */
+    public function setRow(\AppBundle\Entity\Row $row = null)
+    {
+        $this->row = $row;
+
+        return $this;
+    }
+
+    /**
+     * Get row
+     *
+     * @return \AppBundle\Entity\Row 
+     */
+    public function getRow()
+    {
+        return $this->row;
     }
 }

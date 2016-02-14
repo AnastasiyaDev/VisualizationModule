@@ -13,25 +13,20 @@
 
     </div>
 
-{{ table.columns }}
-
 
     <form autocomplete="off" action="{{ path("fillingTable", {'id' : table.id}) }}" method="post">
 
         <table>
-            {% for i in 1..table.rowCount %}
-            <tr>
-                {% for j in 1..table.columnCount %}
-                <td><input name="value[{{ i }}][{{ j }}]" ></td>
-                {% endfor %}
-            </tr>
+            {% for row in table.rows %}
+                <tr>
+                    {% for col in table.columns %}
+                        <td><input name="value[{{ row.id }}][{{ col.id }}]" ></td>
+                    {% endfor %}
+                </tr>
             {% endfor %}
 
 
         </table><br>
-
-
-
 
 
 

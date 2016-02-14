@@ -17,11 +17,9 @@ class Row extends NameEntity{
     private $table;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CellValue",inversedBy="rows")
-     * @ORM\JoinColumn(name="value_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="CellValue", mappedBy="row", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
-    private $value;
-
+    private $values;
 
     /**
      * Set table
