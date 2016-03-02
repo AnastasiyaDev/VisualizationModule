@@ -1,6 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block title %}{{ table.title }} | {{ parent() }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+{% endblock %}
 
 {% block body %}
 
@@ -13,20 +17,12 @@
 
     </div>
 
-
-
         <table class="table table-hover table-bordered table-condensed">
-            {#<th>#</th>#}
-            {#{% for header in table.rows.first.values %}#}
-                {#<th>{{ header.column.name }}</th>#}
-            {#{% endfor %}#}
+
             <tbody>
                 {% for row in table.rows %}
 
                     <tr>
-                        {#<th>#}
-                            {#{{ row.name }}#}
-                        {#</th>#}
                         {% for value in row.values %}
                             <td>{{ value.value }}</td>
                         {% endfor %}
@@ -37,9 +33,46 @@
 
         </table><br>
 
+    <div id="container" style="height: 400px"></div>
+
+    <script>
 
 
-
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '{{ table.title }}'
+                },
+                subtitle: {
+                text: '{{ table.info }}'
+                },
+                xAxis: {
+                    categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas'] // 100 200 300 ...
+                },
+                yAxis: {
+                title: {
+                text: '{{ table.rowLabel }}'
+                }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'John', //Задача_1
+                    data: [5, 3, 4, 7, 2]
+                }, {
+                    name: 'Jane', //Задача_2
+                    data: [2, 5, 15, 2, 1]
+                }, {
+                    name: 'Joe',//Задача_3
+                    data: [3, 4, 4, 10, 5]
+                }]
+            });
+        });
+    </script>
 
 
 

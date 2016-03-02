@@ -16,13 +16,16 @@ class TableController extends Controller
 {
 
     /**
-     * @Route("/tableid{id}", name="filingTableForm")
+     * @Route("experimentid{experimentid}/tableid{id}", name="filingTableForm")
      */
-    public function indexAction($id)
+    public function indexAction($id, $experimentid)
     {
         $table = $this->getDoctrine()
             ->getRepository('AppBundle:Table')
             ->find($id);
+        $exp = $this->getDoctrine()
+            ->getRepository('AppBundle:Experiment')
+            ->find($experimentid);
 
         if(!$table) {
             throw $this->createNotFoundException('No found table for id'.$id);
@@ -71,7 +74,7 @@ class TableController extends Controller
         $em->persist($table);
         $em->flush();
 
-        return $this->redirectToRoute('filingTableForm', array('id' => $table->getId() ));
+        return $this->redirectToRoute('filingTableForm', array('id' => $table->getId() , 'experimentid' => $exp->getId() ));
     }
 
     /**
@@ -111,6 +114,30 @@ class TableController extends Controller
         $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
         return $this->render('experiment/table/final_table.html.twig', ['table' => $table]);
     }
+
+    /**
+     * @Route("experimentid{experimentid}/tableid{id}", name="showTable")
+     */
+
+    public function showTableAction($id, $experimentid){
+
+        $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
+        $exp = $this->getDoctrine()->getRepository('AppBundle:Experiment')->find($experimentid);
+
+        if (!$table->getColumns()->getValues()->isEmpty()) {
+//            foreach ($table->getRows()-> getValues() as $userTable) {
+//                if ($userTable === $table)
+//                    return $this->redirectToRoute('finalTable', ['id' => $table->getId()]);
+//            }
+
+        }
+
+
+        return $this->redirectToRoute('filingTableForm', ['id' => $table->getId() , 'experimentid' => $exp->getId()]);
+
+    }
+
+
 
 
 

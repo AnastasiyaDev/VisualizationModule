@@ -94,7 +94,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/id{id}/experiment/id{experimentId}", name="userExperiment")
+     * @Route("/id{id}/experimentid{experimentId}", name="userExperiment")
      */
     public function showUserExperimentAction($id, $experimentId)
     {
