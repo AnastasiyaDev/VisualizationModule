@@ -66,6 +66,12 @@ class Table extends BaseEntity
      * @ORM\OneToMany(targetEntity="CellValue", mappedBy="table", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
     private $values;
+
+    /**
+     * @ORM\Column(type="boolean" )
+     */
+    private $filing = false;
+
     /**
      * Constructor
      */
@@ -357,5 +363,28 @@ class Table extends BaseEntity
     public function getValues()
     {
         return $this->values;
+    }
+
+    /**
+     * Set filing
+     *
+     * @param boolean $filing
+     * @return Table
+     */
+    public function setFiling($filing)
+    {
+        $this->filing = $filing;
+
+        return $this;
+    }
+
+    /**
+     * Get filing
+     *
+     * @return boolean 
+     */
+    public function getFiling()
+    {
+        return $this->filing;
     }
 }

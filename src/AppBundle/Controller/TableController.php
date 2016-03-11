@@ -32,7 +32,6 @@ class TableController extends Controller
         }
 
 
-
         return $this->render('experiment/table/filling_table.html.twig', array('table' => $table));
     }
 
@@ -101,6 +100,7 @@ class TableController extends Controller
                 $em->persist($col);
             }
         }
+        $table->setFiling(true);
         $em->flush();
 
         return $this->redirectToRoute('finalTable', ['id' => $table->getId()]);
@@ -112,33 +112,11 @@ class TableController extends Controller
     public function finalTableAction($id)
     {
         $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
+
+        if (!$table->getFiling()) {
+            return $this->redirectToRoute('filingTableForm', ['id' => $table->getId() , 'experimentid' => $table->getExperiment()->getId()]);
+        }
         return $this->render('experiment/table/final_table.html.twig', ['table' => $table]);
     }
-
-    /**
-     * @Route("experimentid{experimentid}/tableid{id}", name="showTable")
-     */
-
-    public function showTableAction($id, $experimentid){
-
-        $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
-        $exp = $this->getDoctrine()->getRepository('AppBundle:Experiment')->find($experimentid);
-
-        if (!$table->getColumns()->getValues()->isEmpty()) {
-//            foreach ($table->getRows()-> getValues() as $userTable) {
-//                if ($userTable === $table)
-//                    return $this->redirectToRoute('finalTable', ['id' => $table->getId()]);
-//            }
-
-        }
-
-
-        return $this->redirectToRoute('filingTableForm', ['id' => $table->getId() , 'experimentid' => $exp->getId()]);
-
-    }
-
-
-
-
 
 }

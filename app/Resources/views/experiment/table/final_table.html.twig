@@ -21,10 +21,20 @@
 
             <tbody>
                 {% for row in table.rows %}
-
+                    <script>
+                        var arr{{ loop.index }} = [];
+                        var first = true;
+                    </script>
                     <tr>
                         {% for value in row.values %}
                             <td>{{ value.value }}</td>
+                            <script>
+                                if (first) {
+                                    first = false;
+                                } else {
+                                    arr{{ loop.parent.loop.index }}.push({{ value.value }})
+                                }
+                            </script>
                         {% endfor %}
                     </tr>
 
@@ -50,26 +60,23 @@
                 text: '{{ table.info }}'
                 },
                 xAxis: {
-                    categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas'] // 100 200 300 ...
+                    categories: arr1 // 100 200 300 ... row[0] col[1..n]
                 },
                 yAxis: {
                 title: {
-                text: '{{ table.rowLabel }}'
+                text: '{{ table.columnLabel }}'
                 }
                 },
                 credits: {
                     enabled: false
                 },
-                series: [{
-                    name: 'John', //Задача_1
-                    data: [5, 3, 4, 7, 2]
-                }, {
-                    name: 'Jane', //Задача_2
-                    data: [2, 5, 15, 2, 1]
-                }, {
-                    name: 'Joe',//Задача_3
-                    data: [3, 4, 4, 10, 5]
-                }]
+                series: [
+                    {% for row in table.rows[1:] %}
+                        {
+                    name: '{{ row.values|first.value }}',
+                    data: arr{{ loop.index+1 }}
+                    },
+                    {% endfor %}]
             });
         });
     </script>
