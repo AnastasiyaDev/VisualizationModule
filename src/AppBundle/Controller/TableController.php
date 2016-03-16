@@ -50,6 +50,7 @@ class TableController extends Controller
         $table->setRowLabel($request->get('_rlable'));
         $table->setColumnCount($request->get('_col-count'));
         $table->setRowCount($request->get('_row-count'));
+        $table->setCellLabel($request->get('_cellable'));
 
         //row create
         for ($i = 0 ; $i < $table->getRowCount(); $i++) {

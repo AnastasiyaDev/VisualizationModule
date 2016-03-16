@@ -45,11 +45,15 @@
                 <option selected="selected" disabled>Выберите число строк: </option>
             </select>
 
+            <div class="al-center marg-auto">
+                <label for="name-cel-field" class="al-center disp-block">Значение ячеек: </label>
+                <input type="text" id="name-cel-field" name="_cellable" size="30" tabindex="8" required>
+            </div>
+
 
             <div class="sent-reset marg-auto">
-                {#нет юзера#}
-                {#<a href="{{ path('userExperiment',{'id':user.id, 'experimentId': experiment.id}) }}" class="btn">Назад</a> #}
-                <button type="submit" class="fl-right btn btn-success" id="" tabindex="5">Создать</button>
+                <a href="{{ path('userExperiment',{'id': experiment.user.id, 'experimentId': experiment.id}) }}" class="btn">Назад</a>
+                <button type="submit" class="fl-right btn btn-success" id="" tabindex="9">Создать</button>
             </div>
 
         </form>

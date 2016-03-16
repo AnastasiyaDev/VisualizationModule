@@ -109,3 +109,52 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 td input {
   width: 100%;
 }
+.breadcrumb li:before {
+  content: " / ";
+}
+.breadcrumb li:first-child:before {
+  content: '';
+}
+.margin-top-5 {
+  margin-top: 5px;
+}
+.well-custom {
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  margin: 10px 0px 20px 0px;
+  border-radius: 5px ;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+}
+.select-box {
+  margin: 5px;
+  border: 1px solid #000;
+  width: 300px;
+  height: 200px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3) inset;
+  overflow: auto;
+}
+.select-box:hover {
+  box-shadow: 0 0 5px rgba(0, 55, 86, 0.6);
+  border: 1px solid #0CA7F0;
+}
+.select-box a {
+  height: 100%;
+}
+.select-box a h4,
+.select-box a p {
+  color: #000000;
+  margin: 0px;
+  padding: 10px 5px;
+  word-break: normal;
+}
+.select-box a:hover {
+  text-decoration: none;
+  color: #000000;
+}
+.prompt {
+  color: #777;
+  font-style: italic;
+}
+.add {
+  margin: 5px 0px 0px 5px;
+}

@@ -4,32 +4,35 @@
 
 {% block body %}
 
-  <div id="hellobox"> Hello, {{ user.firstName }} {{ user.secondName }}</div>
 
+  <h2 class="well al-center"> Welcome, {{ user.firstName }} {{ user.secondName }}
+    <a href={{ path('_logout') }}><button class="btn btn-inverse fl-right margin-top-5">Выйти</button></a>
+  </h2>
+
+  <ol class="breadcrumb">
+    <li class="active">Главная</li>
+  </ol>
 
   {% if user.experiments is not empty %}
+
     {% for experiment in user.experiments %}
 
-
-        <a href={{ path('userExperiment',{'id':user.id,'experimentId':experiment.id}) }}>
-          <h3>{{ experiment.name }}</h3></a>
-          <span>{{ experiment.description }}</span>
-
+      <div class="select-box fl-left">
+        <a class="disp-block" href={{ path('userExperiment',{'id':user.id,'experimentId':experiment.id}) }}>
+          <h4>{{ experiment.name }}</h4>
+          <p>{{ experiment.description }}</p>
+        </a>
+      </div>
 
     {% endfor %}
 
   {% else %}
-
-      <span id="prompt">Здесь будут отображаться ваши эксперименты</span>
-
+      <span class="prompt">Здесь будут отображаться ваши эксперименты</span>
   {% endif %}
 
     <form action="{{ path('experimentPage', {'id':user.id}) }}">
-        <button type="submit" class="btn btn-success">Добавить эксперимент</button>
+        <button type="submit" class="btn btn-success add">Добавить эксперимент</button>
     </form>
-    <br>
-    <br>
 
-    <a href={{ path('_logout') }}><button class="btn btn-inverse" id="exit" >Выйти</button></a>
 
 {% endblock %}

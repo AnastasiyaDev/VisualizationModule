@@ -47,6 +47,11 @@ class Table extends BaseEntity
     private $row_count;
 
     /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $cell_label;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Experiment",inversedBy="tables")
      * @ORM\JoinColumn(name="experiment_id", referencedColumnName="id")
      */
@@ -62,10 +67,10 @@ class Table extends BaseEntity
      */
     private $rows;
 
-    /**
-     * @ORM\OneToMany(targetEntity="CellValue", mappedBy="table", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
-     */
-    private $values;
+//    /**
+//     * @ORM\OneToMany(targetEntity="CellValue", mappedBy="table", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
+//     */
+//    private $values;
 
     /**
      * @ORM\Column(type="boolean" )
@@ -386,5 +391,28 @@ class Table extends BaseEntity
     public function getFiling()
     {
         return $this->filing;
+    }
+
+    /**
+     * Set cell_label
+     *
+     * @param string $cellLabel
+     * @return Table
+     */
+    public function setCellLabel($cellLabel)
+    {
+        $this->cell_label = $cellLabel;
+
+        return $this;
+    }
+
+    /**
+     * Get cell_label
+     *
+     * @return string 
+     */
+    public function getCellLabel()
+    {
+        return $this->cell_label;
     }
 }

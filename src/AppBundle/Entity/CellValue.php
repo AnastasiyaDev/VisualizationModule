@@ -25,11 +25,11 @@ class CellValue extends BaseEntity{
      */
     private $value;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Table",inversedBy="values")
-     * @ORM\JoinColumn(name="table_id", referencedColumnName="id")
-     */
-    private $table;
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Table",inversedBy="values")
+//     * @ORM\JoinColumn(name="table_id", referencedColumnName="id")
+//     */
+//    private $table;
 
     /**
      * @ORM\ManyToOne(targetEntity="Column",inversedBy="values")
@@ -180,4 +180,13 @@ class CellValue extends BaseEntity{
     {
         return $this->row;
     }
+//
+//    public function valFloatOrString(){
+//
+//        if ( gettype( $this->value ) == "double")
+//            return  $value_float = 1;
+//        else if ( gettype( $this->value ) == "string")
+//            return  $value_string = 1;
+//        else return $value_float = 0 && $value_string = 0;
+//    }
 }

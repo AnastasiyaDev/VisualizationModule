@@ -54,6 +54,7 @@ class ExperimentController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('aboutExperiment', array('id' => $exp->getId()));
+//        return $this->redirectToRoute('userExperiment', array('id' => $user-> getId(), 'experimentId' => $exp->getId()) );
     }
 
     /**
