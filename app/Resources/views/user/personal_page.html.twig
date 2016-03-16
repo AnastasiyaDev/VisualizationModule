@@ -17,8 +17,8 @@
 
     {% for experiment in user.experiments %}
 
-      <div class="select-box fl-left">
-        <div class="opacity-box">
+      <div class="select-box fl-left position-rel">
+        <div class="opacity-box position-abs">
           <p>{{ experiment.expdate|date("d.m.Y") }}</p>
           <p>{{ experiment.status }}</p>
         </div>

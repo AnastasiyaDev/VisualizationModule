@@ -21,16 +21,11 @@
             {% for table in experiment.tables %}
 
                 <div class="select-box fl-left">
-                    <a href={{ path('finalTable',{'id':table.id}) }}>
+                    <a class="disp-block" href={{ path('finalTable',{'id':table.id}) }}>
                         <h4>{{ table.title }}</h4>
                         <p>{{ table.info }}</p>
                     </a>
                 </div>
-
-                    {#<a href={{ path('finalTable',{'id':table.id}) }}>#}
-                    {#<h3>{{ table.title }}</h3>#}
-                {#</a>#}
-                {#<span>{{ table.info }}</span>#}
 
             {% endfor %}
 
