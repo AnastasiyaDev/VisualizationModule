@@ -123,6 +123,7 @@ td input{
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
 }
 .select-box{
+  position: relative;
   margin: 5px;
   border: 1px solid #000;
   width: 300px;
@@ -131,6 +132,9 @@ td input{
   &:hover{
     box-shadow: 0 0 5px rgba(0,55,86,0.6);
     border: 1px solid @color-blue;
+  }
+  &:hover .opacity-box{
+    display: none;
   }
   a{
     height: 100%;
@@ -146,7 +150,24 @@ td input{
       color: #000000;
     }
   }
-  overflow: auto;
+  overflow: hidden; // or auto
+}
+.opacity-box{
+  position:absolute;
+  opacity: 0.9;
+  background-color: @color-grey + #666;
+  height: inherit;
+  width: inherit;
+  p{
+    text-align: center;
+    margin-top: 25%;
+    font-weight: bold;
+    color: @color-blue - #222;
+    font-size: 18px;
+  }
+  &:hover{
+    display: none;
+  }
 }
 .prompt{
   color: @color-grey;

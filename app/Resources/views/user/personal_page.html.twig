@@ -18,8 +18,12 @@
     {% for experiment in user.experiments %}
 
       <div class="select-box fl-left">
+        <div class="opacity-box">
+          <p>{{ experiment.expdate|date("d.m.Y") }}</p>
+          <p>{{ experiment.status }}</p>
+        </div>
         <a class="disp-block" href={{ path('userExperiment',{'id':user.id,'experimentId':experiment.id}) }}>
-          <h4>{{ experiment.name }}</h4>
+          <h4>{{ experiment.name}}</h4>
           <p>{{ experiment.description }}</p>
         </a>
       </div>
