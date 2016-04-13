@@ -1,5 +1,6 @@
 @color-blue: #0CA7F0;
 @color-grey: #777;
+@color-light-grey: @color-grey + #666;
 @f-s-12: 12px;
 .zeroing{
   margin: 0px;
@@ -153,7 +154,7 @@ td input{
 }
 .opacity-box{
   opacity: 0.9;
-  background-color: @color-grey + #666;
+  background-color: @color-light-grey;
   height: inherit;
   width: inherit;
   p{
@@ -173,4 +174,11 @@ td input{
 }
 .add{
   margin: 5px 0px 0px 5px;
+}
+table tr:first-child td:first-child{
+  background-color: @color-light-grey;
+  input{
+    background-color: @color-light-grey;
+    visibility: hidden;
+  }
 }

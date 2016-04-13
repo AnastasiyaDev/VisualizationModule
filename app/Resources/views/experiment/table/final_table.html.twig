@@ -37,7 +37,11 @@
                             if (first) {
                                 first = false;
                             } else {
-                                arr{{ loop.parent.loop.index }}.push({{ value.value }})
+                                if ( {{ loop.parent.loop.index }} == {{ 1 }}) {
+                                    arr{{ loop.parent.loop.index }}.push("{{ value.value }}");
+                                } else {
+                                    arr{{ loop.parent.loop.index }}.push({{ value.value }})
+                                }
                             }
                         </script>
                     {% endfor %}
@@ -69,9 +73,9 @@
                     categories: arr1 // 100 200 300 ... row[0] col[1..n]
                 },
                 yAxis: {
-                title: {
-                text: '{{ table.cellLabel }}'
-                }
+                    title: {
+                    text: '{{ table.cellLabel }}'
+                    }
                 },
                 credits: {
                     enabled: false

@@ -177,3 +177,10 @@ td input {
 .add {
   margin: 5px 0px 0px 5px;
 }
+table tr:first-child td:first-child {
+  background-color: #dddddd;
+}
+table tr:first-child td:first-child input {
+  background-color: #dddddd;
+  visibility: hidden;
+}
