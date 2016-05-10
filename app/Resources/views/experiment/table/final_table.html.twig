@@ -41,11 +41,12 @@
                                 if ( {{ loop.parent.loop.index }} == {{ 1 }}) {
                                     arr{{ loop.parent.loop.index }}.push("{{ value.value }}");
                                 } else {
-                                    arr{{ loop.parent.loop.index }}.push({{ value.value }})
+                                    arr{{ loop.parent.loop.index }}.push({{ value.value }});
                                 }
                             }
                         </script>
                     {% endfor %}
+
                 </tr>
 
             {% endfor %}
@@ -53,43 +54,146 @@
 
         </table><br>
 
-    <div id="container" style="height: 400px"></div>
+    <button id="showColumnChart" type="button" class="btn btn-primary">Show Column chart</button>
+    <button id="showCombinChart" type="button" class="btn btn-primary">Show Combination chart</button>
+    <button id="showSplineChart" type="button" class="btn btn-primary">Show Spline chart</button>
 
+    <div id="container" style="margin-top:20px; height: 400px"></div>
 
     <script>
 
 
-        $(function () {
-            $('#container').highcharts({
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: '{{ table.title }}'
-                },
-                subtitle: {
-                text: '{{ table.info }}'
-                },
-                xAxis: {
-                    categories: arr1 // 100 200 300 ... row[0] col[1..n]
-                },
-                yAxis: {
+        $(function(){
+            $("#showColumnChart").on("click", function(){
+                $('#container').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
                     title: {
-                    text: '{{ table.cellLabel }}'
-                    }
-                },
-                credits: {
-                    enabled: false
-                },
-                series: [
-                    {% for row in table.rows[1:] %}
+                        text: '{{ table.title }}'
+                    },
+                    subtitle: {
+                        text: '{{ table.info }}'
+                    },
+                    xAxis: {
+                        categories: arr1 // 100 200 300 ... row[0] col[1..n]
+                    },
+                    yAxis: {
+                        title: {
+                            text: '{{ table.cellLabel }}'
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [
+                        {% for row in table.rows[1:] %}
                         {
-                        name: '{{ row.values|first.value }}', // row[1...n] col[0]
-                        data: arr{{ loop.index+1 }}
+                            name: '{{ row.values|first.value }}', // row[1...n] col[0]
+                            data: arr{{ loop.index+1 }}
                         },
-                    {% endfor %}]
+                        {% endfor %}]
+                });
             });
         });
+
+        $(function(){
+            $("#showCombinChart").on("click", function(){
+                $('#container').highcharts({
+                    title: {
+                        text: '{{ table.title }}'
+                    },
+                    subtitle: {
+                        text: '{{ table.info }}'
+                    },
+                    xAxis: {
+                        categories: arr1
+                    },
+                    yAxis: {
+                        title: {
+                            text: '{{ table.cellLabel }}'
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [
+                        {% for row in table.rows[1:] %}
+                        {   type: 'column',
+                            name: '{{ row.values|first.value }}',
+                            data: arr{{ loop.index+1 }}
+                        },
+
+                        {
+                            type: 'spline',
+                            name: 'MAX',
+                            data: arr{{ loop.index+1 }},
+                            marker: {
+                                lineWidth: 2,
+                                lineColor: Highcharts.getOptions().colors[3],
+                                fillColor: 'white',
+                                states: {
+                                    select: true
+                                }
+
+                            }
+                        },
+                        {% endfor %}
+
+                    ]
+                });
+            });
+        });
+
+        $(function(){
+            $("#showSplineChart").on("click", function(){
+                $('#container').highcharts({
+                    chart: {
+                        type: 'spline',
+                        marginRight: 120
+                    },
+                    title: {
+                        text: '{{ table.title }}'
+                    },
+                    subtitle: {
+                        text: '{{ table.info }}'
+                    },
+
+                    legend: {
+                        align: 'right',
+                        verticalAlign: 'top',
+                        layout: 'vertical',
+                        itemMarginBottom: 10,
+                        x: 0,
+                        y: 100
+                    },
+                    xAxis: {
+                        categories: arr1
+                    },
+                    yAxis: {
+                        title: {
+                            text: '{{ table.cellLabel }}'
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [
+                        {% for row in table.rows[1:] %}
+                        {
+                            name: '{{ row.values|first.value }}',
+                            data: arr{{ loop.index+1 }}
+                        },
+                        {% endfor %}]
+                });
+            });
+        });
+
     </script>
 
 

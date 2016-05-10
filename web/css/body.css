@@ -73,6 +73,7 @@ body {
 }
 textarea {
   resize: none;
+  height: 80px !important;
 }
 a {
   outline: none;

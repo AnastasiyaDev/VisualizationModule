@@ -10,10 +10,14 @@
 
     <form id="newExp" autocomplete="off" action="{{ path("newExperiment") }}" method="post" name="newExp">
 
-        {#{% for experiment in user.experiments %}#}
-        <h1>Эксперимент № </h1>
+        {% if user.experiments is empty %}
+            <h1>Эксперимент № 1</h1>
+        {% else %}
+        {% for experiment in user.experiments %}
+        <h1>Эксперимент № {{ loop.index+1 }} </h1>
+        {% endfor %}
+        {% endif %}
 
-        {#{{ loop.index }}#}
         <div class="al-center marg-auto">
             <label for="name-field" class="al-center disp-block">Название: </label>
             <input type="text" id="name-field" name="_expname" size="30" tabindex="1" required>
@@ -44,7 +48,6 @@
             <button type="submit" class="fl-right btn btn-success" id="" tabindex="5">Создать</button>
         </div>
 
-    {#{% endfor %}#}
 
     </form>
 
