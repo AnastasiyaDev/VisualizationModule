@@ -185,3 +185,16 @@ table tr:first-child td:first-child input {
   background-color: #dddddd;
   visibility: hidden;
 }
+.edit-pen {
+  margin-top: 2px;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background: url("../images/ui-icons_222222_256x240.png") no-repeat -65px -113px;
+  top: 35px;
+  right: 5px;
+}
+.edit-pen:hover,
+.edit-pen:active {
+  background: url("../images/ui-icons_2694e8_256x240.png") no-repeat -65px -113px !important;
+}

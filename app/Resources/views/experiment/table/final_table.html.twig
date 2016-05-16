@@ -14,7 +14,9 @@
             {{ parent() }}
             <li><a href="{{ path('userPage',{'id': table.experiment.user.id}) }}">Главная</a></li>
             <li><a href="{{ path('userExperiment',{'id': table.experiment.user.id, 'experimentId': table.experiment.id}) }}">{{ table.experiment.name }}</a></li>
-            <li class="active">{{ table.title }}</li>
+            <li class="active">{{ table.title }}
+                <a href="{{ path('editTableForm', {'id':table.id}) }}" class ="edit-pen" title="Редактировать"></a>
+            </li>
         </ol>
 
         <div class="al-center">

@@ -120,4 +120,14 @@ class TableController extends Controller
         return $this->render('experiment/table/final_table.html.twig', ['table' => $table]);
     }
 
+    /**
+     * @Route("/tableid{id}/edit", name="editTableForm")
+     */
+    public function editTestFormAction(Request $request, $id){
+
+        $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
+        
+
+    }
+
 }

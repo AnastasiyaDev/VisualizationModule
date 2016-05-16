@@ -4,41 +4,27 @@
 
 {% block body %}
 
+    <div>
+        <h3>{{ table.title }}</h3>
+        <p>{{ table.info }}</p>
+    </div>
+    <hr>
+    <h4>Заполните поля таблицы значениями:</h4>
+    <form autocomplete="off" action="{{ path("fillingTable", {'id' : table.id}) }}" method="post">
 
-        <div>
-            <h3>{{ table.title }}</h3>
-            <p>{{ table.info }}</p>
-        </div>
+        <table class="table table-bordered table-condensed">
+            {% for row in table.rows %}
+                <tr>
+                    {% for col in table.columns %}
+                        <td><input name="value[{{ row.id }}][{{ col.id }}]" ></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table><br>
 
-        <hr>
+        <button type="submit" class="btn btn-success">Создать</button>
 
-        <h4>Заполните поля таблицы значениями:</h4>
-
-
-        <form autocomplete="off" action="{{ path("fillingTable", {'id' : table.id}) }}" method="post">
-
-            <table class="table table-bordered table-condensed">
-                {% for row in table.rows %}
-                    <tr>
-                        {% for col in table.columns %}
-                            <td><input name="value[{{ row.id }}][{{ col.id }}]" ></td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-
-
-            </table><br>
-
-
-            <button type="submit" class="btn btn-success">Создать</button>
-        </form>
-
-        {#{% if root is not defined %}#}
-            {#<a href= {% if back is defined %} "{{ back }}" {% else %} "." {% endif %}><div>Back</div></a>#}
-        {#{% endif %}#}
-        <a href="{{ path('userExperiment',{'id': table.experiment.user.id, 'experimentId': table.experiment.id}) }}" class="btn">Назад</a>
-
-
-
+    </form>
+    <a href="{{ path('userExperiment',{'id': table.experiment.user.id, 'experimentId': table.experiment.id}) }}" class="btn">Назад</a>
 
 {% endblock %}
