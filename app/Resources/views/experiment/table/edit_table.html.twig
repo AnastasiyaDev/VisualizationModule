@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ table.title }} | Редактирование {% endblock %}
+
+{% block body %}
+
+    <div>
+        <h3>{{ table.title }}</h3>
+        <p>{{ table.info }}</p>
+    </div>
+    <hr>
+    <h4>Измените значения полей таблицы и сохраните изменения:</h4>
+    <form autocomplete="off" action="{{ path("saveTable", {'id' : table.id}) }}" method="post">
+
+        <table class="table table-bordered table-condensed">
+            {% for row in table.rows %}
+                <tr>
+                    {% for value in row.values %}
+                        <td><input name="value[{{ value.id }}]" value="{{ value.value }}" ></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table><br>
+
+        <button type="submit" class="btn btn-success">Сохранить изменения</button>
+
+    </form>
+    <a href="{{ path('finalTable', {'id' : table.id}) }}" class="btn">Назад</a>
+
+{% endblock %}

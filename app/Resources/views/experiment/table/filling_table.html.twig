@@ -14,9 +14,14 @@
 
         <table class="table table-bordered table-condensed">
             {% for row in table.rows %}
+                {#<tr>#}
+                    {#{% for col in table.columns %}#}
+                        {#<td><input name="value[{{ row.id }}][{{ col.id }}]" value="{{  }}" ></td>#}
+                    {#{% endfor %}#}
+                {#</tr>#}
                 <tr>
                     {% for col in table.columns %}
-                        <td><input name="value[{{ row.id }}][{{ col.id }}]" ></td>
+                        <td><input name="value[{{ row.id }}][{{ col.id }}]" value="" ></td>
                     {% endfor %}
                 </tr>
             {% endfor %}

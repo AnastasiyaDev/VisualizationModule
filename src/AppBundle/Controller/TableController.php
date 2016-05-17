@@ -126,8 +126,29 @@ class TableController extends Controller
     public function editTestFormAction(Request $request, $id){
 
         $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
-        
 
+        return $this->render('experiment/table/edit_table.html.twig', ['table' => $table]);
+
+    }
+
+    /**
+     * @Route("/tableid{id}/save", name="saveTable")
+     */
+    public function saveTableAction($id, Request $request)
+    {
+        $array = $request->get('value');
+        $table = $this->getDoctrine()->getRepository('AppBundle:Table')->find($id);
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($array as $valueId => $item) {
+            $cellValue = $this->getDoctrine()->getRepository('AppBundle:CellValue')
+                ->find($valueId);
+            $cellValue->setValue($item);
+            $em->persist($cellValue);
+        }
+        $em->flush();
+
+        return $this->redirectToRoute('finalTable', ['id' => $table->getId()]);
     }
 
 }
