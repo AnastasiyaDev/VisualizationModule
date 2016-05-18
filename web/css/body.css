@@ -203,3 +203,7 @@ table tr:first-child td:first-child input {
   background-position: 98% 50%;
   background-size: 8%;
 }
+#container {
+  margin-top: 20px;
+  height: 400px;
+}

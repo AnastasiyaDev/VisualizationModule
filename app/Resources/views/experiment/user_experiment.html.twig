@@ -16,26 +16,33 @@
     </ol>
 
 
-        {% if experiment.tables is not empty %}
+    {% if experiment.tables is not empty %}
 
-            {% for table in experiment.tables %}
+        {% for table in experiment.tables %}
 
-                <div class="select-box fl-left">
-                    <a class="disp-block" href={{ path('finalTable',{'id':table.id}) }}>
-                        <h4>{{ table.title }}</h4>
-                        <p>{{ table.info }}</p>
-                    </a>
-                </div>
+            <div class="select-box fl-left">
+                <a class="disp-block" href={{ path('finalTable',{'id':table.id}) }}>
+                    <h4>{{ table.title }}</h4>
+                    <p>{{ table.info }}</p>
+                </a>
+            </div>
 
-            {% endfor %}
+        {% endfor %}
 
-        {% else %}
-            <span class="prompt">Здесь будут отображаться ваши таблицы</span>
-        {% endif %}
+    {% else %}
+        <span class="prompt">Здесь будут отображаться ваши таблицы</span>
+    {% endif %}
 
-        <form method="post" action={{ path('tablePage',{'id':experiment.id}) }}>
-            <button type="submit" class="btn btn-success add">Дабавить таблицу</button>
-        </form>
+    <form method="post" action={{ path('tablePage',{'id':experiment.id}) }}>
+        <button type="submit" class="btn btn-success add">Дабавить таблицу</button>
+    </form>
+
+    {# Внешняя загрузка данных#}
+        {#<p class="text-info">или выбрать CSV-файл:</p>#}
+
+        {#<form enctype="multipart/form-data" method="post">#}
+            {#<input type="file" accept="text/csv">#}
+        {#</form>#}
 
 
 {% endblock %}

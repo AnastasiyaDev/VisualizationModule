@@ -41,11 +41,11 @@
 
                 <div>
                     <label for="user-email" class="al-center disp-block">Ваш e-mail:</label>
-                    <input type="email" id="user-email" name="_email" size="37" tabindex="6" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required >
+                    <input type="email" id="user-email" name="_email" size="37" tabindex="6" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required>
                 </div>
 
                 <div >
-                    <select name="_select" class="disp-block marg-auto marg-top-14">
+                    <select name="_select" class="disp-block marg-auto marg-top-14" required>
                         <option selected="selected" disabled>Выберите должность</option>
                         <option>Студент</option>
                         <option>Аспирант</option>
@@ -62,6 +62,8 @@
                         <option>Ректор</option>
                     </select>
                 </div>
+
+                <i><p class="text-error al-center">Все поля обязательны для заполнения</p></i>
 
                 <div class="sent-reset marg-auto">
                     <a href="{{ path('root') }}" class="btn">Назад</a>
