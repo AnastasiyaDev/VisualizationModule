@@ -1,0 +1,80 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Добавление бенчмарка | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <div class="content position-fix welcome-reg-content">
+
+
+        <form id="newBench" autocomplete="off" action="{{ path("newBenchmark") }}" method="post" name="newBench">
+
+            <h3>Заполните данные для бенчмарка</h3>
+
+            <div class="al-center marg-auto">
+                <label for="name-field" class="al-center disp-block">Название: </label>
+                <input type="text" id="name-field" name="_benchname" size="30" tabindex="1" required>
+            </div>
+
+            <div class="al-center marg-auto">
+                <label for="des-field" class="al-center disp-block">Описание: </label>
+                <textarea id="des-field" name="_description" cols="37" tabindex="2" required></textarea>
+            </div>
+
+            <select name="_processor" class="disp-block marg-auto marg-top-14" tabindex="3" required>
+                <option selected="selected" disabled>Выберите процессор: </option>
+                <option>Intel Core 2</option>
+                <option>Intel Celeron</option>
+                <option>Intel Pentium</option>
+                <option>Intel Core i3</option>
+                <option>Intel Core i5</option>
+                <option>Intel Core i7</option>
+                <option>AMD Sempron</option>
+                <option>AMD Athlon II</option>
+                <option>AMD Phenom II</option>
+                <option>AMD A</option>
+                <option>AMD FX</option>
+            </select>
+
+            <div class="al-center marg-auto">
+                <label for="datepicker" class="al-center disp-block">Выберите дату: </label>
+                <input type="text" id="datepicker" name="_benchdate" size="25" tabindex="4" required>
+            </div>
+
+            <select id="col-count" name="_col-count" class="disp-block marg-auto marg-top-14" tabindex="5" required>
+                <option selected="selected" disabled>Выберите число столбцов: </option>
+            </select>
+
+            <select id="row-count" name="_row-count" class="disp-block marg-auto marg-top-14" tabindex="6" required>
+                <option selected="selected" disabled>Выберите число строк: </option>
+            </select>
+
+            <i><p class="text-error al-center">Все поля обязательны для заполнения</p></i>
+
+            <div class="sent-reset marg-auto">
+                <a href="{{ path('userPage',{'id':user.id}) }}" class="btn">Назад</a>
+                <button type="submit" class="fl-right btn btn-success" id="" tabindex="5">Создать</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <script>
+        $(function() {
+            $( "#datepicker" ).datepicker();
+        });
+    </script>
+
+    <script>
+
+        for(var i = 1; i<101; i++)
+        {
+            $('#col-count').append( $('<option>'+ i +'</option>'));
+            $('#row-count').append( $('<option>'+ i +'</option>'));
+        }
+
+    </script>
+
+
+{% endblock %}

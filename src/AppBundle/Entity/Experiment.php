@@ -27,6 +27,11 @@ class Experiment extends NameEntity{
     protected $status;
 
     /**
+     * @ORM\Column(type="string", length=15)
+     */
+    protected $processor;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User",inversedBy="experiments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -36,7 +41,6 @@ class Experiment extends NameEntity{
      * @ORM\OneToMany(targetEntity="Table", mappedBy="experiment", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
     private $tables;
-
 
     /**
      * Constructor
@@ -202,5 +206,28 @@ class Experiment extends NameEntity{
     public function getEveryTable()
     {
         return $this->every_table;
+    }
+
+    /**
+     * Set processor
+     *
+     * @param string $processor
+     * @return Experiment
+     */
+    public function setProcessor($processor)
+    {
+        $this->processor = $processor;
+
+        return $this;
+    }
+
+    /**
+     * Get processor
+     *
+     * @return string 
+     */
+    public function getProcessor()
+    {
+        return $this->processor;
     }
 }

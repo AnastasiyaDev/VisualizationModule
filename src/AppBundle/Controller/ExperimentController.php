@@ -43,6 +43,7 @@ class ExperimentController extends Controller
         $exp->setName($request->get('_expname'));
         $exp->setDescription($request->get('_description'));
         $exp->setExpDate(new \DateTime(date('d.m.Y', strtotime($request->get('_expdate')))));
+        $exp->setProcessor($request->get('_processor'));
         $exp->setStatus($request->get('_status'));
 
         $user = $this->getUser();

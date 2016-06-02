@@ -25,7 +25,7 @@ class UserController extends Controller
 
 
     /**
-     * @Route("id{id}",name="userPage")
+     * @Route("/id{id}",name="userPage")
      */
     public function showUserAction($id) {
 
@@ -85,7 +85,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("id{id}/addExperiment", name="experimentPage")
+     * @Route("/id{id}/addExperiment", name="experimentPage")
      */
     public function addExperimentAction($id)
     {
@@ -107,16 +107,29 @@ class UserController extends Controller
         return $this->render(':experiment:user_experiment.html.twig', array('user' => $user, 'experiment' => $exp));
     }
 
+    /**
+     * @Route("/id{id}/addBenchmark", name="benchmarkPage")
+     */
+    public function addBenchmarkAction($id)
+    {
+        $user = $this->getUser();
+        return $this->render('benchmark/new_benchmark.html.twig', array('user' => $user));
+    }
 
-
-
-
-
-
-
-
-
-
+//    /**
+//     * @Route("/id{id}/benchmarkid{benchmarkId}", name="userBenchmark")
+//     */
+//    public function showUserBenchmarkAction($id, $benchmarkId)
+//    {
+////        die('gsegse');
+//        $user = $this->getUser();
+////        if ($user!= $this->getDoctrine()->getRepository('AppBundle:User')->find($id) ) {
+////            return $this->redirectToRoute('userPage',array('id' => $user->getId()));
+////        }
+//        $bench = $this->getDoctrine()->getRepository('AppBundle:Benchmark')->find($benchmarkId);
+////
+//        return $this->render('benchmark/final_benchmark.html.twig', array('user' => $user, 'benchmark' => $bench));
+//    }
 
 
 }

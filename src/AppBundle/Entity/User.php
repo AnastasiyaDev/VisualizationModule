@@ -51,21 +51,18 @@ Class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=25)
      */
     private $post;
-
-
+    
     /**
      * @ORM\OneToMany(targetEntity="Experiment", mappedBy="user", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
     private $experiments;
 
-
     /**
-     * Constructor
+     * @ORM\OneToMany(targetEntity="Benchmark", mappedBy="user", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
-    public function __construct()
-    {
-        $this->tables = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    private $benchmarks;
+
+
 
     /**
      * Set username
@@ -167,38 +164,6 @@ Class User implements UserInterface, \Serializable
         return $this->secondName;
     }
 
-    /**
-     * Add tables
-     *
-     * @param \AppBundle\Entity\Table $tables
-     * @return User
-     */
-    public function addTable(\AppBundle\Entity\Table $tables)
-    {
-        $this->tables[] = $tables;
-
-        return $this;
-    }
-
-    /**
-     * Remove tables
-     *
-     * @param \AppBundle\Entity\Table $tables
-     */
-    public function removeTable(\AppBundle\Entity\Table $tables)
-    {
-        $this->tables->removeElement($tables);
-    }
-
-    /**
-     * Get tables
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getTables()
-    {
-        return $this->tables;
-    }
 
 
     public function getRoles()
@@ -322,5 +287,38 @@ Class User implements UserInterface, \Serializable
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * Add benchmarks
+     *
+     * @param \AppBundle\Entity\Benchmark $benchmarks
+     * @return User
+     */
+    public function addBenchmark(\AppBundle\Entity\Benchmark $benchmarks)
+    {
+        $this->benchmarks[] = $benchmarks;
+
+        return $this;
+    }
+
+    /**
+     * Remove benchmarks
+     *
+     * @param \AppBundle\Entity\Benchmark $benchmarks
+     */
+    public function removeBenchmark(\AppBundle\Entity\Benchmark $benchmarks)
+    {
+        $this->benchmarks->removeElement($benchmarks);
+    }
+
+    /**
+     * Get benchmarks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBenchmarks()
+    {
+        return $this->benchmarks;
     }
 }

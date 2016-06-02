@@ -13,9 +13,9 @@
         {% if user.experiments is empty %}
             <h1>Эксперимент № 1</h1>
         {% else %}
-        {% for experiment in user.experiments %}
-        <h1>Эксперимент № {{ loop.index+1 }} </h1>
-        {% endfor %}
+            {% for experiment in user.experiments %}
+                <h1>Эксперимент № {{ experiment.id+1 }}</h1>
+            {% endfor %}
         {% endif %}
 
         <div class="al-center marg-auto">
@@ -33,6 +33,20 @@
             <input type="text" id="datepicker" name="_expdate" size="25" tabindex="3" required>
         </div>
 
+        <select name="_processor" class="disp-block marg-auto marg-top-14" tabindex="3" required>
+            <option selected="selected" disabled>Выберите процессор: </option>
+            <option>Intel Core 2</option>
+            <option>Intel Celeron</option>
+            <option>Intel Pentium</option>
+            <option>Intel Core i3</option>
+            <option>Intel Core i5</option>
+            <option>Intel Core i7</option>
+            <option>AMD Sempron</option>
+            <option>AMD Athlon II</option>
+            <option>AMD Phenom II</option>
+            <option>AMD A</option>
+            <option>AMD FX</option>
+        </select>
 
         <select name="_status" class="disp-block marg-auto marg-top-14" tabindex="4" required>
             <option selected="selected" disabled>Выберите статус: </option>

@@ -6,6 +6,7 @@ use AppBundle\Entity\Column;
 use AppBundle\Entity\Row;
 use AppBundle\Entity\Table;
 use AppBundle\Entity\CellValue;
+use AppBundle\Entity\Benchmark;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -117,7 +118,10 @@ class TableController extends Controller
         if (!$table->getFiling()) {
             return $this->redirectToRoute('filingTableForm', ['id' => $table->getId() , 'experimentid' => $table->getExperiment()->getId()]);
         }
-        return $this->render('experiment/table/final_table.html.twig', ['table' => $table]);
+        return $this->render('experiment/table/final_table.html.twig', [
+                'table' => $table,
+                'benchmarkList' => $this->getDoctrine()->getRepository('AppBundle:Benchmark')->findAll(),
+            ]);
     }
 
     /**

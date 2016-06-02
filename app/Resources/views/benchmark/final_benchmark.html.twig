@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ benchmark.name }} | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <ol class="breadcrumb">
+        {{ parent() }}
+        <li><a href="{{ path('userPage',{'id': benchmark.user.id}) }}">Главная</a></li>
+        <li class="active">{{ benchmark.name }}
+            {#<a href="{{ path('editTableForm', {'id':table.id}) }}" class ="edit-pen" title="Редактировать"></a>#}
+        </li>
+    </ol>
+
+    <div>
+        <p>{{ benchmark.description }}</p>
+    </div>
+
+    <table class="table table-hover table-bordered table-condensed">
+
+        <tbody>
+        {% for row in benchmark.rows %}
+            <script>
+                var arr{{ loop.index }} = [];
+                var first = true;
+            </script>
+            <tr>
+                {% for value in row.values %}
+                    <td>{{ value.value }}</td>
+                    <script>
+                        if (first) {
+                            first = false;
+                        } else {
+                            if ( {{ loop.parent.loop.index }} == {{ 1 }}) {
+                                arr{{ loop.parent.loop.index }}.push("{{ value.value }}");
+                            } else {
+                                arr{{ loop.parent.loop.index }}.push({{ value.value }});
+                            }
+                        }
+                    </script>
+                {% endfor %}
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+
+    </table><br>
+
+    <a href="{{ path('userPage',{'id':benchmark.user.id}) }}" class="btn">Назад</a>
+
+{% endblock %}

@@ -20,11 +20,10 @@
         </ol>
 
         <div class="al-center">
-            {#<h3>{{ table.title }}</h3>#}
             <p>{{ table.info }}</p>
         </div>
 
-
+    {% set indexBench = 0 %}
         <table class="table table-hover table-bordered table-condensed">
 
             <tbody>
@@ -44,6 +43,7 @@
                                     arr{{ loop.parent.loop.index }}.push("{{ value.value }}");
                                 } else {
                                     arr{{ loop.parent.loop.index }}.push({{ value.value }});
+                                    {% set indexBench = loop.parent.loop.index %}
                                 }
                             }
                         </script>
@@ -52,6 +52,8 @@
                 </tr>
 
             {% endfor %}
+            <tr class="warning" id="bench_tr"></tr>
+
             </tbody>
 
         </table><br>
@@ -59,12 +61,44 @@
     <button id="showColumnChart" type="button" class="btn btn-primary">Show Column chart</button>
     <button id="showCombinChart" type="button" class="btn btn-primary">Show Combination chart</button>
     <button id="showSplineChart" type="button" class="btn btn-primary">Show Spline chart</button>
-    <button type="button" class="btn btn-warning fl-right">compared with the benchmark</button>
+
+    <div class="btn-group fl-right">
+        <a class="btn btn-warning" href="#"><i class=""></i>compared with the benchmark</a>
+        <a class="btn btn-warning dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            {% if benchmarkList is not empty %}
+
+                {% for benchmark in benchmarkList %}
+
+                    <li><a href="#" onclick="bench({{ benchmark.id }})"> {{ benchmark.name}}</a></li>
+
+                {% endfor %}
+
+            {% endif %}
+
+        </ul>
+    </div>
 
     <div id="container"></div>
 
     <script>
 
+        function bench(id) {
+            $.ajax({
+                url: '{{ path('getBench') }}',
+                data: {id: id},
+                type: 'POST',
+                dataType: 'json',
+                success: function(data){
+                    data.forEach(function(item) {
+                        var arr{{ indexBench +1 }} = [];
+                        $('<td>' + item + '</td>').appendTo($('#bench_tr'));
+                        arr{{ indexBench +1 }}.push(item);
+                    });
+
+                }
+            })
+        }
 
         $(function(){
             $("#showColumnChart").on("click", function(){
@@ -73,10 +107,11 @@
                         type: 'column'
                     },
                     title: {
-                        text: '{{ table.title }}'
+                        {#text: '{{ table.title }}'#}
+                        text: ' '
                     },
                     subtitle: {
-                        text: '{{ table.info }}'
+                        {#text: '{{ table.info }}'#}
                     },
                     xAxis: {
                         categories: arr1 // 100 200 300 ... row[0] col[1..n]
@@ -104,10 +139,11 @@
             $("#showCombinChart").on("click", function(){
                 $('#container').highcharts({
                     title: {
-                        text: '{{ table.title }}'
+                        {#text: '{{ table.title }}'#}
+                        text: ' '
                     },
                     subtitle: {
-                        text: '{{ table.info }}'
+                        {#text: '{{ table.info }}'#}
                     },
                     xAxis: {
                         categories: arr1
@@ -156,12 +192,12 @@
                         marginRight: 120
                     },
                     title: {
-                        text: '{{ table.title }}'
+                        {#text: '{{ table.title }}'#}
+                        text: ' '
                     },
                     subtitle: {
-                        text: '{{ table.info }}'
+                        {#text: '{{ table.info }}'#}
                     },
-
                     legend: {
                         align: 'right',
                         verticalAlign: 'top',
@@ -196,6 +232,58 @@
                 });
             });
         });
+
+         function lol(){
+
+
+                $('#container').highcharts({
+
+                    chart: {
+                        type: 'spline',
+                        marginRight: 120
+                    },
+                    title: {
+                        {#text: '{{ table.title }}'#}
+                        text: ' '
+                    },
+                    subtitle: {
+                        {#text: '{{ table.info }}'#}
+                    },
+                    legend: {
+                        align: 'right',
+                        verticalAlign: 'top',
+                        layout: 'vertical',
+                        itemMarginBottom: 10,
+                        x: 0,
+                        y: 100
+                    },
+                    xAxis: {
+                        categories: arr1
+                    },
+                    yAxis: {
+                        title: {
+                            text: '{{ table.cellLabel }}'
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: false
+                        }
+                    },
+                    series: [
+                        {% for row in table.rows[1:] %}
+                        {
+                            name: '{{ row.values|first.value }}',
+                            data: arr{{ loop.index+1 }}
+                        },
+                        {% endfor %}
+                    ]
+
+                })
+         }
 
     </script>
 

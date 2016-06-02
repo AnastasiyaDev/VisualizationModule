@@ -34,9 +34,31 @@
       <span class="prompt">Здесь будут отображаться ваши эксперименты</span>
   {% endif %}
 
-    <form action="{{ path('experimentPage', {'id':user.id}) }}">
-        <button type="submit" class="btn btn-success add">Добавить эксперимент</button>
-    </form>
+  {% if user.benchmarks is not empty %}
+
+    {% for benchmark in user.benchmarks %}
+
+      <div class="select-box fl-left position-rel">
+        <div class="opacity-box position-abs">
+          <p>{{ benchmark.benchdate|date("d.m.Y") }}</p>
+          <p>{{ benchmark.processor }}</p>
+        </div>
+        <a class="disp-block" href={{ path('finalBench',{'id':benchmark.id}) }}>
+          <h4>{{ benchmark.name}}</h4>
+          <p>{{ benchmark.description }}</p>
+        </a>
+      </div>
+
+    {% endfor %}
+
+  {% endif %}
+
+  <form action="{{ path('experimentPage', {'id':user.id}) }}">
+    <button type="submit" class="btn btn-success add">Добавить эксперимент</button>
+  </form>
+  <form action="{{ path('benchmarkPage', {'id':user.id}) }}">
+    <button type="submit" class="btn btn-success add">Добавить бенчмарк</button>
+  </form>
 
 
 {% endblock %}
