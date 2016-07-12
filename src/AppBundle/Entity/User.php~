@@ -51,14 +51,17 @@ Class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=25)
      */
     private $post;
-
-
+    
     /**
      * @ORM\OneToMany(targetEntity="Experiment", mappedBy="user", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
     private $experiments;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Benchmark", mappedBy="user", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
+     */
+    private $benchmarks;
+    
     /**
      * Constructor
      */

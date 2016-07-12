@@ -41,6 +41,7 @@
                             } else {
                                 if ( {{ loop.parent.loop.index }} == {{ 1 }}) {
                                     arr{{ loop.parent.loop.index }}.push("{{ value.value }}");
+                                    $('tr').addClass("firstRow");
                                 } else {
                                     arr{{ loop.parent.loop.index }}.push({{ value.value }});
                                     {% set indexBench = loop.parent.loop.index %}
@@ -79,7 +80,8 @@
         </ul>
     </div>
 
-    <div id="container"></div>
+    <div id="charContainer"></div>
+
 
     <script>
 
@@ -102,16 +104,14 @@
 
         $(function(){
             $("#showColumnChart").on("click", function(){
-                $('#container').highcharts({
+                $('#charContainer').highcharts({
                     chart: {
                         type: 'column'
                     },
                     title: {
-                        {#text: '{{ table.title }}'#}
                         text: ' '
                     },
                     subtitle: {
-                        {#text: '{{ table.info }}'#}
                     },
                     xAxis: {
                         categories: arr1 // 100 200 300 ... row[0] col[1..n]
@@ -137,13 +137,11 @@
 
         $(function(){
             $("#showCombinChart").on("click", function(){
-                $('#container').highcharts({
+                $('#charContainer').highcharts({
                     title: {
-                        {#text: '{{ table.title }}'#}
                         text: ' '
                     },
                     subtitle: {
-                        {#text: '{{ table.info }}'#}
                     },
                     xAxis: {
                         categories: arr1
@@ -186,17 +184,15 @@
 
         $(function(){
             $("#showSplineChart").on("click", function(){
-                $('#container').highcharts({
+                $('#charContainer').highcharts({
                     chart: {
                         type: 'spline',
                         marginRight: 120
                     },
                     title: {
-                        {#text: '{{ table.title }}'#}
                         text: ' '
                     },
                     subtitle: {
-                        {#text: '{{ table.info }}'#}
                     },
                     legend: {
                         align: 'right',
@@ -233,57 +229,121 @@
             });
         });
 
-         function lol(){
+//        ------------------------------------------------------------------------
+
+//        var Arr1 = [];
+//        var Arr = [];
+
+//        function matrixArray(rows,columns){
+//            var arr = new Array();
+//            for(var i=0; i<columns; i++){
+//                arr[i] = new Array();
+//                for(var j=0; j<rows; j++){
+//                    arr[i][j] = i+j+1;//вместо i+j+1 пишем любой наполнитель. В простейшем случае - null
+//                }
+//            }
+//            return arr;
+//        }
+//
+//        var myMatrix = matrixArray(3,3);
 
 
-                $('#container').highcharts({
 
-                    chart: {
-                        type: 'spline',
-                        marginRight: 120
-                    },
-                    title: {
-                        {#text: '{{ table.title }}'#}
-                        text: ' '
-                    },
-                    subtitle: {
-                        {#text: '{{ table.info }}'#}
-                    },
-                    legend: {
-                        align: 'right',
-                        verticalAlign: 'top',
-                        layout: 'vertical',
-                        itemMarginBottom: 10,
-                        x: 0,
-                        y: 100
-                    },
-                    xAxis: {
-                        categories: arr1
-                    },
-                    yAxis: {
-                        title: {
-                            text: '{{ table.cellLabel }}'
-                        }
-                    },
-                    plotOptions: {
-                        line: {
-                            dataLabels: {
-                                enabled: true
-                            },
-                            enableMouseTracking: false
-                        }
-                    },
-                    series: [
-                        {% for row in table.rows[1:] %}
-                        {
-                            name: '{{ row.values|first.value }}',
-                            data: arr{{ loop.index+1 }}
-                        },
-                        {% endfor %}
-                    ]
+//        $('tr[class!="firstRow"]')
+//        $('tr').filter("[class != firstRow]")
 
-                })
-         }
+
+
+
+//        var Arr = [][];
+//        var k = null;
+//        $('document').find('tr').each(function() {
+//
+//            $(this).find('td').each(function(){
+//
+//            Arr[k][] = $(this).val();
+//        });
+//        k++;
+//        });
+
+//  ---------------------------------------------------------------------------------------
+
+        {#$(function(){#}
+            {#$("#showSplineChart").on("click", function(){#}
+
+                {#var Arr2 = [];#}
+                {#$('tr').each(function(){#}
+                    {#$("td:nth-child(1) ~ *td").each(function(){#}
+                        {#Arr2.push($(this).html());#}
+                    {#});#}
+
+                {#});#}
+                {#alert( Arr2 );#}
+
+                {#$('#charContainer').highcharts({#}
+                    {#chart: {#}
+                        {#type: 'spline',#}
+                        {#marginRight: 120#}
+                    {#},#}
+                    {#title: {#}
+                        {#text: ' '#}
+                    {#},#}
+                    {#subtitle: {#}
+                    {#},#}
+                    {#legend: {#}
+                        {#align: 'right',#}
+                        {#verticalAlign: 'top',#}
+                        {#layout: 'vertical',#}
+                        {#itemMarginBottom: 10,#}
+                        {#x: 0,#}
+                        {#y: 100#}
+                    {#},#}
+                    {#xAxis: {#}
+                        {#categories: arr1#}
+                    {#},#}
+                    {#yAxis: {#}
+                        {#title: {#}
+                            {#text: '{{ table.cellLabel }}'#}
+                        {#}#}
+                    {#},#}
+                    {#plotOptions: {#}
+                        {#line: {#}
+                            {#dataLabels: {#}
+                                {#enabled: true#}
+                            {#},#}
+                            {#enableMouseTracking: false#}
+                        {#}#}
+                    {#},#}
+
+                    {#series : [{#}
+                        {#name :  "4656",#}
+{#//                                (function () {#}
+{#//                            var count = $('.def > td:first-child' ).size(), i;#}
+{#//                            for (i = 1; i <= count; i++) {#}
+{#//                                "$('tr td:first-child').val()"#}
+{#//                            }#}
+{#//#}
+{#//                        }()),#}
+
+                        {#data : "ff"#}
+{#//                                (function () {#}
+{#//#}
+{#//                            var data = [];#}
+{#//                            var count = $('tr:first > td').size(), i;#}
+{#//#}
+{#//                            for (i = 1; i <= count; i++) {#}
+{#//                                    data.push([#}
+{#//                                        $('tr td:nth-child(i) ~ *').val()#}
+{#//#}
+{#//                                    ]);#}
+{#//                            }#}
+{#//                            return data;#}
+{#//                        }())#}
+                    {#}]#}
+
+                {#});#}
+            {#});#}
+        {#});#}
 
     </script>
 

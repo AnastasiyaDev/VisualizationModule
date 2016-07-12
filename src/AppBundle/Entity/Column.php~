@@ -15,6 +15,12 @@ class Column extends NameEntity{
      * @ORM\JoinColumn(name="table_id", referencedColumnName="id")
      */
     private $table;
+    
+        /**
+     * @ORM\ManyToOne(targetEntity="Benchmark",inversedBy="columns")
+     * @ORM\JoinColumn(name="benchmark_id", referencedColumnName="id")
+     */
+    private $benchmark;
 
 
     /**
@@ -47,28 +53,6 @@ class Column extends NameEntity{
         return $this->table;
     }
 
-    /**
-     * Set value
-     *
-     * @param \AppBundle\Entity\Value $value
-     * @return Column
-     */
-    public function setValue(\AppBundle\Entity\Value $value = null)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return \AppBundle\Entity\Value 
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
     /**
      * Constructor
      */

@@ -6,6 +6,7 @@
 
 
   <h2 class="well al-center"> Welcome, {{ user.firstName }} {{ user.secondName }}
+    {#<a href={{ path('testPage', {'id':user.id}) }}><button class="btn btn-inverse fl-right margin-top-5">TEST</button></a>#}
     <a href={{ path('_logout') }}><button class="btn btn-inverse fl-right margin-top-5">Выйти</button></a>
   </h2>
 

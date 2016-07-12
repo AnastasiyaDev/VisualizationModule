@@ -132,4 +132,14 @@ class UserController extends Controller
 //    }
 
 
+    /**
+     * @Route("/id{id}/tests", name="testPage")
+     */
+    public function testAction($id)
+    {
+        $user = $this->getUser();
+        return $this->render(':user:test.html.twig', array('user' => $user));
+    }
+
+
 }

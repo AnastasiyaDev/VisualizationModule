@@ -1,0 +1,55 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="benchmarks")
+ */
+class Benchmark extends NameEntity{
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=15)
+     */
+    protected $processor;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $bench_date;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $column_count;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $row_count;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User",inversedBy="benchmarks")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+        /**
+     * @ORM\OneToMany(targetEntity="Column", mappedBy="benchmark", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
+     */
+    private $columns;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Row", mappedBy="benchmark", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
+     */
+    private $rows;
+
+
+}
